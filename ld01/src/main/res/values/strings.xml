@@ -13,4 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings related to LaunchActivity -->
+    <string name="launch_text1">Automatically save to the web</string>
+    <string name="launch_text2">\nNever lose your progress,so you can\n keep working any computer or\n device</string>
 </resources>

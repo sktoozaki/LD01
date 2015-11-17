@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import com.rey.material.widget.Button;
@@ -37,18 +39,27 @@ public class LoginActivity extends Activity {
         btnSkip= (Button) findViewById(R.id.login_skip);
         btnSignIn= (Button) findViewById(R.id.login_signin);
 
-        float startX=imgLogo.getX();
-        float startY=imgLogo.getY();
-        final ScaleAnimation animation=new ScaleAnimation(0.0f,1.4f,0.0f,1.4f, Animation.RELATIVE_TO_SELF,1f,Animation.RELATIVE_TO_SELF,1f);
-        animation.setDuration(500);
+        final ScaleAnimation scaleAnimation=new ScaleAnimation(1f,0.6f,1f,0.6f, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        scaleAnimation.setDuration(500);
+        scaleAnimation.setFillAfter(true);
+
+        final TranslateAnimation translateAnimation=new TranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,
+                0.0f,Animation.RELATIVE_TO_SELF,0.5f);
+        translateAnimation.setDuration(500);
+        translateAnimation.setFillAfter(true);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgLogo.setAnimation(animation);
-                animation.startNow();
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
 
+//                imgLogo.setAnimation(scaleAnimation);
+//                imgLogo.startAnimation(scaleAnimation);
 
+//                imgLogo.setAnimation(translateAnimation);
+//                imgLogo.startAnimation(translateAnimation);
+
+//                scaleAnimation.startNow();
                /* float startY=imgLogo.getY();
                 float endY=startY-100;
                 ValueAnimator ascendAnim= ObjectAnimator.ofFloat(imgLogo,"y",startY,endY);
