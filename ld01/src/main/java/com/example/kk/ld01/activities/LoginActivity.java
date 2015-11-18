@@ -1,19 +1,15 @@
-package com.example.kk.ld01;
+package com.example.kk.ld01.activities;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.example.kk.ld01.R;
 import com.rey.material.widget.Button;
 
 public class LoginActivity extends Activity {

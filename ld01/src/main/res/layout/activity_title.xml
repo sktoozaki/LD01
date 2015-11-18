@@ -45,6 +45,7 @@
         >
 
         <Button
+            android:id="@+id/skip_titleA_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,6 +55,7 @@
             />
 
         <Button
+            android:id="@+id/signin_titleA_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

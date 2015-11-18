@@ -19,4 +19,8 @@
     <string name="launch_text2">\nNever lose your progress,so you can\n keep working any computer or\n device</string>
     <string name="title_main">Time Manager</string>
     <string name="title_second">Best To-Do List Manager</string>
+    <string name="main_signin">SignIn</string>
+    <string name="main_email">Email</string>
+    <string name="main_password">password</string>
+    <string name="main_account">I have an account:</string>
 </resources>

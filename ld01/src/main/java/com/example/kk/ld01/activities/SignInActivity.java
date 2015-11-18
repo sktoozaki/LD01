@@ -1,9 +1,11 @@
-package com.example.kk.ld01;
+package com.example.kk.ld01.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class SignInActivity extends AppCompatActivity {
+import com.example.kk.ld01.R;
+
+public class SignInActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
