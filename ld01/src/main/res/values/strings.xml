@@ -17,4 +17,6 @@
     <!-- Strings related to LaunchActivity -->
     <string name="launch_text1">Automatically save to the web</string>
     <string name="launch_text2">\nNever lose your progress,so you can\n keep working any computer or\n device</string>
+    <string name="title_main">Time Manager</string>
+    <string name="title_second">Best To-Do List Manager</string>
 </resources>
