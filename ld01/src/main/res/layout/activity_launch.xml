@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:src="@mipmap/rocket"
+        android:src="@drawable/rocket"
         android:layout_weight="1"
         />
 

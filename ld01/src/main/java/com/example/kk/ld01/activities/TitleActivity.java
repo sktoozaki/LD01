@@ -25,7 +25,7 @@ public class TitleActivity extends Activity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TitleActivity.this,LoginActivity.class));
+                startActivity(new Intent(TitleActivity.this,SignInActivity.class));
             }
         });
     }

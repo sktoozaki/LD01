@@ -23,4 +23,9 @@
     <string name="main_email">Email</string>
     <string name="main_password">password</string>
     <string name="main_account">I have an account:</string>
+    <string name="mainA_search">Search</string>
+    <string name="mainA_settings">Settings</string>
+    <string name="mainA_filter">Filter</string>
+    <string name="mainA_title">Today</string>
+    <string name="mainA_subtitle">APRIL 2015</string>
 </resources>
