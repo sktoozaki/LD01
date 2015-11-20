@@ -6,14 +6,26 @@
     android:background="@drawable/title_background"
    >
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/scene_root"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        >
+        <include
+            layout="@layout/a_scene"
+            ></include>
+
+    </FrameLayout>
+
+  <!--  <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:paddingTop="80dp"
         android:layout_gravity="center"
         android:src="@drawable/logo"
-        />
+        />-->
 
     <TextView
     android:layout_width="match_parent"
