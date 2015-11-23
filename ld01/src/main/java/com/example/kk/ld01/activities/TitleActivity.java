@@ -49,6 +49,7 @@ public class TitleActivity extends Activity {
                 TransitionInflater inflater=TransitionInflater.from(TitleActivity.this);
                 Transition mChangeBounds=inflater.inflateTransition(R.transition.changebounds_trans);
                 TransitionManager.go(mBScene,mChangeBounds);
+
             }
         });
     }
