@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.+'
     compile 'com.android.support:design:22.+'
     compile 'com.github.rey5137:material:1.2.1'
+    compile 'com.prolificinteractive:material-calendarview:1.1.0'
+    compile 'com.joanzapata.android:base-adapter-helper:1.1.11'
 }
