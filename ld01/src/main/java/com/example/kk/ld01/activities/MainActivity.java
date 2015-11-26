@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.example.kk.ld01.R;
 import com.example.kk.ld01.models.TaskItem;
-import com.example.kk.ld01.utils.ExtendedListView;
-import com.joanzapata.android.BaseAdapterHelper;
-import com.joanzapata.android.QuickAdapter;
+import com.example.kk.ld01.utils.CommonAdapter;
+import com.example.kk.ld01.utils.ViewHolder;
+import com.getbase.floatingactionbutton.AddFloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ListView mListView;
-    private QuickAdapter mAdapter;
-    private SimpleAdapter simpleAdapter;
+    private AddFloatingActionButton mFAB;
+    private FloatingActionsMenu mMenu;
+    private List<TaskItem> mTaskItemList;
     private TaskItem mTaskItem;
 
     @Override
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar= (Toolbar) findViewById(R.id.toolbar_mainA);
         mListView= (ListView) findViewById(R.id.listview_mainA);
+        mMenu= (FloatingActionsMenu) findViewById(R.id.right_labels);
 
         mToolbar.setTitle(R.string.mainA_title);
         mToolbar.setSubtitle(R.string.mainA_subtitle);
@@ -45,20 +47,26 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setSubtitleTextColor(0xffffffff);
         setSupportActionBar(mToolbar);
 
-        mTaskItem=new TaskItem();
-        mTaskItem.setTaskTitle("Task1");
-        mTaskItem.setTaskContent("This is a test task");
+        mTaskItemList=new ArrayList<TaskItem>();
 
-        mAdapter=new QuickAdapter<TaskItem>(this,R.layout.taskitem) {
+        //TODO 获取服务中的Task
+
+        for (int i=0;i<=10;i++)
+        {
+            mTaskItem=new TaskItem();
+            mTaskItem.setTaskTitle("Task1");
+            mTaskItem.setTaskContent("This is a test task");
+            mTaskItemList.add(mTaskItem);
+        }
+
+        mListView.setAdapter(new CommonAdapter<TaskItem>(MainActivity.this, mTaskItemList,R.layout.taskitem) {
             @Override
-            protected void convert(BaseAdapterHelper helper, TaskItem item) {
-                helper.setText(R.id.task_title,mTaskItem.getTaskTitle());
-                helper.setText(R.id.task_content,mTaskItem.getTaskContent());
-                helper.setImageResource(R.id.task_category,R.drawable.travel);
-                helper.setImageResource(R.id.task_priority,R.drawable.priority_green);
+            public void convert(ViewHolder holder, TaskItem taskItem) {
+                holder.setText(R.id.task_title, taskItem.getTaskTitle());
+                holder.setText(R.id.task_content, taskItem.getTaskContent());
             }
-        };
-        mListView.setAdapter(mAdapter);
+        });
+
     }
 
     @Override
