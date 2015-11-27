@@ -28,4 +28,5 @@
     <string name="mainA_filter">Filter</string>
     <string name="mainA_title">Today</string>
     <string name="mainA_subtitle">APRIL 2015</string>
+    <string name="newtaskA_check">check</string>
 </resources>

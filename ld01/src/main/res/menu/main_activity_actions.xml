@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ld="http://schemas.android.com/apk/res-auto" >
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/search"
-        android:title="@string/mainA_search"
-        ld:showAsAction="always"
-        />
+xmlns:ld="http://schemas.android.com/apk/res-auto" >
+<item android:id="@+id/action_search"
+    android:icon="@drawable/search"
+    android:title="@string/mainA_search"
+    ld:showAsAction="always"
+    />
 
-    <item android:id="@+id/action_filter"
-        android:icon="@drawable/filter"
-        ld:showAsAction="always"
-        android:title="@string/mainA_filter"/>
+<item android:id="@+id/action_filter"
+    android:icon="@drawable/filter"
+    ld:showAsAction="always"
+    android:title="@string/mainA_filter"/>
 
-    <item android:id="@+id/action_settings"
-        android:icon="@drawable/settings"
-        ld:showAsAction="always"
-        android:title="@string/mainA_settings"/>
+<item android:id="@+id/action_settings"
+    android:icon="@drawable/settings"
+    ld:showAsAction="always"
+    android:title="@string/mainA_settings"/>
 
 
 </menu>

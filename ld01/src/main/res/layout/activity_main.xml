@@ -29,19 +29,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Mon"
+                android:text="Mon\n6"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_maina"
                 />
 
+
             <RadioButton
                 android:id="@+id/rb2_mainA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Tue"
+                android:text="Tue\n7"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -53,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Wed"
+                android:text="Wed\n8"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -65,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Thu"
+                android:text="Thu\n9"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -77,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Fri"
+                android:text="Fri\n10"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -89,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Sat"
+                android:text="Sat\n11"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -101,7 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Sun"
+                android:text="Sun\n12"
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
@@ -127,8 +128,8 @@
                 android:layout_height="wrap_content"></ListView>
         </LinearLayout>
 
-        <com.getbase.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/right_labels"
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/fab_mainA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -141,24 +142,7 @@
             fab:fab_addButtonColorPressed="@color/background"
             fab:fab_addButtonPlusIconColor="@color/white"
             fab:fab_labelStyle="@style/menu_labels_style"
-            android:layout_gravity="bottom|right"
-            >
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_title="Label1"
-                fab:fab_colorPressed="@color/white"/>
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_title="Label2"
-                fab:fab_colorPressed="@color/white"/>
-
-        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+            android:layout_gravity="bottom|right"/>
 
     </FrameLayout>
 

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linearL_newtaskA"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_newtaskA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            ></android.support.v7.widget.Toolbar>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Remind me about...."
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/note"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Description"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:src="@drawable/meeting"
+                android:scaleType="centerCrop"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TASK TYPE"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Closed meeting"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"
+                android:scaleType="centerCrop"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="START"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8 Apr.2015,10:56"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"
+                android:scaleType="centerCrop"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="END"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9 Apr.2015,12:25"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fire"
+                android:scaleType="centerCrop"
+                android:paddingLeft="24dp"
+                android:paddingRight="22dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Normal priority"/>
+
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/priority_bar"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+  <!--  <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_menu_newtaskA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        fab:fab_addButtonColorNormal="@color/background"
+        fab:fab_addButtonColorPressed="@color/background"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_gravity="bottom|right">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/contact_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Contact"
+            fab:fab_icon="@drawable/male_user"
+            fab:fab_colorPressed="@color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/location_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_icon="@drawable/pointer"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Location"
+            fab:fab_colorPressed="@color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/microphone_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Voice"
+            fab:fab_icon="@drawable/microphone"
+            fab:fab_colorPressed="@color/white"/>
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/video_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Video"
+            fab:fab_icon="@drawable/video"
+            fab:fab_colorPressed="@color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/photo_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_icon="@drawable/photo"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Photo"
+            fab:fab_colorPressed="@color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/document_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_icon="@drawable/document"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_title="Document"
+            fab:fab_colorPressed="@color/white"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>-->
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_gravity="bottom|right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        fab:menu_fab_size="normal"
+        fab:menu_showShadow="true"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_colorNormal="@color/background"
+        fab:menu_colorPressed="@color/background"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_paddingTop="4dp"
+        fab:menu_labels_paddingRight="8dp"
+        fab:menu_labels_paddingBottom="4dp"
+        fab:menu_labels_paddingLeft="8dp"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_textColor="#FFFFFF"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_colorNormal="#333333"
+        fab:menu_labels_colorPressed="#444444"
+        fab:menu_labels_colorRipple="#66FFFFFF"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_style="@style/menu_labels_style"
+        fab:menu_labels_position="left"
+        fab:menu_openDirection="up"
+        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_fab_show_animation="@anim/jump_from_down"
+        fab:menu_fab_hide_animation="@anim/jump_to_down">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/contact_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/male_user"
+            fab:fab_label="Contact"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/location_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pointer"
+            fab:fab_label="Location"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/microphone_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/microphone"
+            fab:fab_label="Voice"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/video_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/video"
+            fab:fab_label="Video"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/photo_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/photo"
+            fab:fab_label="Photo"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/document_fab_mainA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/document"
+            fab:fab_label="Document"
+            fab:fab_colorNormal="@color/background"
+            fab:fab_colorPressed="@color/white"
+            />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</FrameLayout>
