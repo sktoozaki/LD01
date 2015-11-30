@@ -7,4 +7,5 @@
     <color name="white">#ffffffff</color>
     <color name="black">#000000</color>
     <color name="background_mainA">#F0F0F0</color>
+    <color name="task_detail">#13C4A9</color>
 </resources>

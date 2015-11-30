@@ -32,6 +32,7 @@ public class NewTaskActivity extends AppCompatActivity
         mToolBar= (Toolbar) findViewById(R.id.toolbar_newtaskA);
         mLayout= (LinearLayout) findViewById(R.id.linearL_newtaskA);
 
+        mToolBar.setNavigationIcon(R.drawable.arrow_back);
         mToolBar.setTitle("New Task");
         //识别不了color文件中的配置？？？
         mToolBar.setTitleTextColor(0xffffffff);

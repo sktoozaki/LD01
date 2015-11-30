@@ -29,4 +29,13 @@
     <string name="mainA_title">Today</string>
     <string name="mainA_subtitle">APRIL 2015</string>
     <string name="newtaskA_check">check</string>
+    <string name="task_detail_activity_edit">Edit</string>
+
+    <!-- Strings related to ToolBar -->
+    <string name="actions_edit">Edit</string>
+    <string name="actions_check">Check</string>
+    <string name="title_task_detail_activity">Wireframes for new dashboard in the Trader Tools app</string>
+    <string name="content_task_detail_activity">We want to add a new dashboard to the trader tools app summarising upcoming fixtures in PMA,\n ruring ball events adn cricket fixtures</string>
+    <string name="task_detail_activity_comments">Comments</string>
+    <string name="task_detail_activity_leave_comments">Leave comments</string>
 </resources>

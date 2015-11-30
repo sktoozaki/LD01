@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.kk.ld01.R;
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void convert(ViewHolder holder, TaskItem taskItem) {
                 holder.setText(R.id.task_title, taskItem.getTaskTitle());
                 holder.setText(R.id.task_content, taskItem.getTaskContent());
+            }
+        });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(MainActivity.this,TaskDetailActivity.class));
             }
         });
 
