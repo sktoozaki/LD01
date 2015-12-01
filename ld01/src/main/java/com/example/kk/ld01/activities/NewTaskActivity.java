@@ -37,7 +37,6 @@ public class NewTaskActivity extends AppCompatActivity
         //识别不了color文件中的配置？？？
         mToolBar.setTitleTextColor(0xffffffff);
         setSupportActionBar(mToolBar);
-
     }
 
     @Override

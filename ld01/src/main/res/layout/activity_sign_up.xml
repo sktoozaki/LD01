@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/title_background"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/email_signupA_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/main_email"
+        android:textColorHint="@color/white"
+        android:textColorLink="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/password_signinA_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/main_password"
+        android:textColorHint="@color/white"
+        android:textColorLink="@color/white"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/main_account"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/signin_signinA_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_signin"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

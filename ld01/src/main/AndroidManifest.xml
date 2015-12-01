@@ -42,6 +42,8 @@
 
         <activity android:name=".activities.TaskDetailActivity" >
         </activity>
+        <activity android:name=".activities.SignUpActivity" >
+        </activity>
     </application>
 
 </manifest>
