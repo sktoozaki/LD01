@@ -6,26 +6,14 @@
     android:background="@drawable/title_background"
    >
 
-    <FrameLayout
-        android:id="@+id/scene_root"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        >
-        <include
-            layout="@layout/a_scene"
-            ></include>
-
-    </FrameLayout>
-
-  <!--  <ImageView
+        <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:paddingTop="80dp"
         android:layout_gravity="center"
         android:src="@drawable/logo"
-        />-->
+        />
 
     <TextView
     android:layout_width="match_parent"
@@ -57,13 +45,12 @@
         >
 
         <Button
-            android:id="@+id/skip_titleA_btn"
+            android:id="@+id/signup_titleA_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="SKIP"
+            android:text="@string/sign_up_title_activity"
             android:background="@android:color/transparent"
-
             />
 
         <Button
@@ -71,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="SIGNIN"
+            android:text="@string/sign_in_title_activity"
             android:background="@android:color/transparent"
             />
 

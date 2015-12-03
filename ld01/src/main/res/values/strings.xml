@@ -21,7 +21,7 @@
     <string name="title_second">Best To-Do List Manager</string>
     <string name="main_signin">Sign In</string>
     <string name="main_email">Email</string>
-    <string name="main_password">password</string>
+    <string name="main_password">Password</string>
     <string name="main_account">I have an account:</string>
     <string name="mainA_search">Search</string>
     <string name="mainA_settings">Settings</string>
@@ -38,5 +38,7 @@
     <string name="content_task_detail_activity">We want to add a new dashboard to the trader tools app summarising upcoming fixtures in PMA,\n ruring ball events adn cricket fixtures</string>
     <string name="task_detail_activity_comments">Comments</string>
     <string name="task_detail_activity_leave_comments">Leave comments</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_title_activity">SIGN UP</string>
+    <string name="sign_in_title_activity">SIGN IN</string>
+    <string name="main_ensure_password">Confirm Password</string>
 </resources>

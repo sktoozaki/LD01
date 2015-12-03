@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
+        android:text="@string/sign_up_title_activity"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:gravity="center"
@@ -39,6 +39,15 @@
         android:textColorLink="@color/white"
         />
 
+    <EditText
+        android:id="@+id/ensure_password_signinA_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/main_ensure_password"
+        android:textColorHint="@color/white"
+        android:textColorLink="@color/white"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -54,7 +63,7 @@
             />
 
         <Button
-            android:id="@+id/signin_signinA_btn"
+            android:id="@+id/signup_signupA_btn"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
