@@ -7,7 +7,7 @@ public class TaskItem
 {
     private String taskTitle;
     private String taskContent;
-    private String taskCategory;
+    private Integer taskCategory;
 
     public String getTaskPriority() {
         return taskPriority;
@@ -33,11 +33,11 @@ public class TaskItem
         this.taskContent = taskContent;
     }
 
-    public String getTaskCategory() {
+    public Integer getTaskCategory() {
         return taskCategory;
     }
 
-    public void setTaskCategory(String taskCategory) {
+    public void setTaskCategory(Integer taskCategory) {
         this.taskCategory = taskCategory;
     }
 

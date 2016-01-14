@@ -8,48 +8,52 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-public abstract class CommonAdapter<T> extends BaseAdapter
-{
+public abstract class CommonAdapter<T> extends BaseAdapter {
+	protected LayoutInflater mInflater;
 	protected Context mContext;
 	protected List<T> mDatas;
-	protected LayoutInflater mInflater;
-	private int layoutId;
+	protected final int mItemLayoutId;
 
-	public CommonAdapter(Context context, List<T> datas, int layoutId)
-	{
-		this.mContext = context;
+	public CommonAdapter(Context context, List<T> mDatas, int itemLayoutId) {
 		mInflater = LayoutInflater.from(context);
-		this.mDatas = datas;
-		this.layoutId = layoutId;
+		this.mContext = context;
+		this.mDatas = mDatas;
+		this.mItemLayoutId = itemLayoutId;
 	}
 
 	@Override
-	public int getCount()
-	{
+	public int getCount() {
+		// TODO Auto-generated method stub
 		return mDatas.size();
 	}
 
 	@Override
-	public T getItem(int position)
-	{
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
 		return mDatas.get(position);
 	}
 
 	@Override
-	public long getItemId(int position)
-	{
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
 		return position;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
-		ViewHolder holder = ViewHolder.get(mContext, convertView, parent,
-				layoutId, position);
-		convert(holder, getItem(position));
-		return holder.getConvertView();
+	public View getView(int position, View convertView, ViewGroup parent) {
+		final BaseViewHolder viewHolder = getViewHolder(position, convertView,
+				parent);
+		convert(viewHolder, (T) getItem(position));
+		return viewHolder.getConvertView();
+
 	}
 
-	public abstract void convert(ViewHolder holder, T t);
+	public abstract void convert(BaseViewHolder helper, T item);
 
+	protected BaseViewHolder getViewHolder(int position, View convertView,
+			ViewGroup parent) {
+		return BaseViewHolder.get(mContext, convertView, parent, mItemLayoutId,
+				position);
+	}
 }
