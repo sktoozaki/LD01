@@ -41,4 +41,8 @@
     <string name="sign_up_title_activity">SIGN UP</string>
     <string name="sign_in_title_activity">SIGN IN</string>
     <string name="main_ensure_password">Confirm Password</string>
+    <string name="task_type_1">Closed Meeting</string>
+    <string name="task_type_2">Travel</string>
+    <string name="task_type_3">Call</string>
+    <string name="task_type_4">Idea</string>
 </resources>

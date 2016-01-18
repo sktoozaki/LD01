@@ -37,6 +37,7 @@
                 />
 
             <EditText
+                android:id="@+id/task_title_new_task_activity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="Remind me about...."
@@ -58,6 +59,7 @@
                 />
 
             <EditText
+                android:id="@+id/task_content_new_task_activity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="Description"
@@ -65,12 +67,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/task_type_ll_new_task_activity"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center"
             >
 
             <ImageView
+                android:id="@+id/task_type_img_new_task_activity"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:src="@drawable/meeting"
@@ -94,9 +98,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="Closed meeting"/>
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow"
+                android:scaleType="centerCrop"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                />
 
         </LinearLayout>
 
@@ -116,6 +130,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/task_start_ll_new_task_activity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -128,8 +143,10 @@
                     android:text="START"/>
 
                 <TextView
+                    android:id="@+id/task_start_tview_new_task_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="8 Apr.2015,10:56"/>
             </LinearLayout>
             <ImageView
@@ -142,6 +159,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/task_end_ll_new_task_activity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -154,8 +172,10 @@
                     android:text="END"/>
 
                 <TextView
+                    android:id="@+id/task_end_tview_new_task_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="9 Apr.2015,12:25"/>
             </LinearLayout>
         </LinearLayout>
@@ -185,7 +205,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Normal priority"/>
+                    android:text="Normal priority"
+                    android:textColor="@color/background"
+                    />
 
                 <ImageView
                     android:layout_width="300dp"
@@ -198,84 +220,11 @@
 
     </LinearLayout>
 
-  <!--  <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fab_menu_newtaskA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        fab:fab_addButtonColorNormal="@color/background"
-        fab:fab_addButtonColorPressed="@color/background"
-        fab:fab_addButtonPlusIconColor="@color/white"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_gravity="bottom|right">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/contact_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Contact"
-            fab:fab_icon="@drawable/male_user"
-            fab:fab_colorPressed="@color/white"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/location_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/pointer"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Location"
-            fab:fab_colorPressed="@color/white"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/microphone_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Voice"
-            fab:fab_icon="@drawable/microphone"
-            fab:fab_colorPressed="@color/white"/>
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/video_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Video"
-            fab:fab_icon="@drawable/video"
-            fab:fab_colorPressed="@color/white"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/photo_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/photo"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Photo"
-            fab:fab_colorPressed="@color/white"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/document_fab_mainA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/document"
-            fab:fab_colorNormal="@color/background"
-            fab:fab_title="Document"
-            fab:fab_colorPressed="@color/white"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>-->
-
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
+        android:id="@+id/fab_menu_new_task_activity"
         android:layout_gravity="bottom|right"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:paddingRight="10dp"
@@ -377,5 +326,43 @@
             />
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <LinearLayout
+        android:id="@+id/task_type_options_new_task_activity"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blur"
+        android:gravity="center"
+        >
+
+        <RadioGroup
+            android:id="@+id/task_options_rg_new_task_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.rey.material.widget.RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_type_1"
+                android:checked="true"
+                />
+            <com.rey.material.widget.RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_type_2"
+                />
+            <com.rey.material.widget.RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_type_3"
+                />
+            <com.rey.material.widget.RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_type_4"
+                />
+        </RadioGroup>
+    </LinearLayout>
+
 
 </FrameLayout>
