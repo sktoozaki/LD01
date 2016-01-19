@@ -8,37 +8,37 @@ import org.json.JSONObject;
 /**
  * @Title: LDResponse.java
  * @Package com.example.kk.ld01
- * @Description: 觅来服务端响应解析类
- * @author guojian
+ * @Description: LD01服务端响应解析类
+ * @author JeanKK
  * @date 2016年1月14日
  * @version V0.1
  */
 
 public class LDResponse {
-    private String wcf_result;
-    private JSONObject wcf_resultJson;
+    private String result;
+    private JSONObject resultJson;
     private  int status;
     private  JSONObject data;
 
 
-    public LDResponse(String wcf_result) {
-        setWcf_result(wcf_result);
+    public LDResponse(String result) {
+        setresult(result);
     }
 
-    private boolean getWcf_result() {
-        if (!wcf_result.equals("error")){
+    private boolean getresult() {
+        if (!result.equals("error")){
             return true;
         }else {
             return false;
         }
     }
 
-    private void setWcf_result(String wcf_result) {
-        this.wcf_result=wcf_result;
-        if (!wcf_result.equals("error")){
+    private void setresult(String result) {
+        this.result=result;
+        if (!result.equals("error")){
             try {
-                wcf_resultJson =new JSONObject(wcf_result);
-                Log.d("test", wcf_resultJson.toString());
+                resultJson =new JSONObject(result);
+                Log.d("test", resultJson.toString());
                 setStatus();
                 setData();
             } catch (JSONException e) {
@@ -53,7 +53,7 @@ public class LDResponse {
     }
 
     private void setStatus() throws JSONException {
-        this.status =wcf_resultJson.getJSONObject("wcf_result").getInt("Status");
+        this.status =resultJson.getJSONObject("Result").getInt("Status");
     }
 
     public  JSONObject getData() {
@@ -61,6 +61,6 @@ public class LDResponse {
     }
 
     private void setData() throws JSONException {
-        this.data =wcf_resultJson.getJSONObject("wcf_result").getJSONObject("Data");
+        this.data =resultJson.getJSONObject("Result").getJSONObject("Data");
     }
 }

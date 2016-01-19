@@ -143,11 +143,19 @@
                     android:text="START"/>
 
                 <TextView
-                    android:id="@+id/task_start_tview_new_task_activity"
+                    android:id="@+id/task_start_date_tview_new_task_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
+                    android:textSize="12sp"
                     android:text="8 Apr.2015,10:56"/>
+                <TextView
+                    android:id="@+id/task_start_time_tview_new_task_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:text="8:00"/>
             </LinearLayout>
             <ImageView
                 android:layout_width="wrap_content"
@@ -172,11 +180,19 @@
                     android:text="END"/>
 
                 <TextView
-                    android:id="@+id/task_end_tview_new_task_activity"
+                    android:id="@+id/task_end_date_tview_new_task_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
+                    android:textSize="12sp"
                     android:text="9 Apr.2015,12:25"/>
+                <TextView
+                    android:id="@+id/task_end_time_tview_new_task_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:text="9:00"/>
             </LinearLayout>
         </LinearLayout>
 

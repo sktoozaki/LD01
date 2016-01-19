@@ -1,6 +1,7 @@
 package com.example.kk.ld01.activities;
 
-import android.content.Intent;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,14 +9,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.kk.ld01.R;
+import com.example.kk.ld01.utils.LDResponse;
 import com.github.clans.fab.FloatingActionMenu;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+
+import java.util.Calendar;
 
 /**
  * Created by KK on 2015/11/27.
@@ -28,6 +39,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private FloatingActionMenu mMenu;
     private TextView mTaskTitle;
     private TextView mTaskContent;
+    private TextView mTaskStartDateTView;
+    private TextView mTaskEndDateTView;
     private TextView mTaskStartTimeTView;
     private TextView mTaskEndTimeTView;
     private LinearLayout mTaskStartTimeLL;
@@ -36,6 +49,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout mTaskTypeOptionsLL;
     private ImageView mTaskTypeImg;
     private RadioGroup mTaskOptionsRadioGroup;
+
+    private LDResponse ldResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +65,10 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mMenu= (FloatingActionMenu) findViewById(R.id.fab_menu_new_task_activity);
         mTaskTitle= (TextView) findViewById(R.id.task_title_new_task_activity);
         mTaskContent= (TextView) findViewById(R.id.task_content_new_task_activity);
-        mTaskStartTimeTView= (TextView) findViewById(R.id.task_start_tview_new_task_activity);
-        mTaskEndTimeTView= (TextView) findViewById(R.id.task_end_tview_new_task_activity);
+        mTaskStartDateTView= (TextView) findViewById(R.id.task_start_date_tview_new_task_activity);
+        mTaskEndDateTView= (TextView) findViewById(R.id.task_end_date_tview_new_task_activity);
+        mTaskStartTimeTView= (TextView) findViewById(R.id.task_start_time_tview_new_task_activity);
+        mTaskEndTimeTView= (TextView) findViewById(R.id.task_end_time_tview_new_task_activity);
         mTaskStartTimeLL= (LinearLayout) findViewById(R.id.task_start_ll_new_task_activity);
         mTaskEndTimeLL= (LinearLayout) findViewById(R.id.task_end_ll_new_task_activity);
         mTaskTypeLL= (LinearLayout) findViewById(R.id.task_type_ll_new_task_activity);
@@ -74,6 +91,41 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initService() {
+        //---------------------本地测试的分界线Begin----------------------
+        HttpUtils httpUtils=new HttpUtils();
+        httpUtils.send(HttpRequest.HttpMethod.GET,
+                "http://123.57.158.42:12306/newtask",
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onLoading(long total, long current, boolean isUploading) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        ldResponse = new LDResponse(responseInfo.result);
+                        if (ldResponse.getStatus() == 0) {
+                            Toast.makeText(NewTaskActivity.this, "LDResponse Parsing", Toast.LENGTH_SHORT).show();
+                            Log.d("test", "LDResponse Parsing");
+                            bindData();
+                        } else {
+                            //TODO 异常处理
+                            Toast.makeText(NewTaskActivity.this, "Not Parsing", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                    }
+                });
+        //---------------------本地测试的分界线End----------------------
+    }
+
+    private void bindData() {
 
     }
 
@@ -86,6 +138,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        final Calendar calendar=Calendar.getInstance();
         switch (v.getId())
         {
             case R.id.task_type_ll_new_task_activity:
@@ -95,10 +148,40 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.task_start_ll_new_task_activity:
                 Toast.makeText(this,"task start",Toast.LENGTH_SHORT).show();
+                new TimePickerDialog(NewTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        mTaskStartTimeTView.setText(hourOfDay + "时" + minute + "分");
+                    }
+                },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+
+                new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        mTaskStartDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+                    }
+                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+
                 break;
 
             case R.id.task_end_ll_new_task_activity:
                 Toast.makeText(this,"task end",Toast.LENGTH_SHORT).show();
+
+                new TimePickerDialog(NewTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        mTaskEndTimeTView.setText(hourOfDay + "时" + minute + "分");
+                    }
+                },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+
+                new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        mTaskEndDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+                    }
+                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+
                 break;
 
             default:

@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,13 +17,10 @@ import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.BaseViewHolder;
 import com.example.kk.ld01.utils.CommonAdapter;
 import com.example.kk.ld01.utils.LDResponse;
-import com.example.kk.ld01.utils.ViewHolder;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TaskItem mTaskItem;
     private LDResponse ldResponse;
     private CommonAdapter listAdapter;
-
+    private long mExitTime = 0;
     private Gson gson;
 
     @Override
@@ -55,7 +51,26 @@ public class MainActivity extends AppCompatActivity {
         initService();
     }
 
+    //禁用返回
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        // 连按两次返回键退出程序
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) < 2000) {
+                finish();
+                System.exit(0);
+            }
+            mExitTime = System.currentTimeMillis();
+            Toast.makeText(this, "再按一次退出程序！", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
+    }
+
+
     private void initService() {
+
         //---------------------本地测试的分界线Begin----------------------
         HttpUtils httpUtils=new HttpUtils();
         httpUtils.send(HttpRequest.HttpMethod.GET,
@@ -77,18 +92,6 @@ public class MainActivity extends AppCompatActivity {
                             //TODO 异常处理
                             Toast.makeText(MainActivity.this, "Not Parsing", Toast.LENGTH_SHORT).show();
                         }
-
-                        /*try {
-                            JSONObject data=new JSONObject(responseInfo.result);
-                            adURL=data.getString("ad");
-                            itemsString=data.getString("items");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        gson=new Gson();
-                        itemList=new ArrayList<ViewPagerNewItem>();
-                        itemList=gson.fromJson(itemsString, new TypeToken<ArrayList<ViewPagerNewItem>>() { }.getType());
-                        Log.d("test", itemList.toString());*/
                     }
 
                     @Override
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTaskItemList=new ArrayList<>();
         try {
-            mTaskItemList=gson.fromJson(ldResponse.getData().getJSONArray("items").toString(), new TypeToken<ArrayList<TaskItem>>() {
+            mTaskItemList=gson.fromJson(ldResponse.getData().getJSONArray("tasks").toString(), new TypeToken<ArrayList<TaskItem>>() {
             }.getType());
 
         } catch (JSONException e) {
