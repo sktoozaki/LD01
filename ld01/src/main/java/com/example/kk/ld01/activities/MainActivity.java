@@ -8,10 +8,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.example.kk.ld01.R;
 import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.BaseViewHolder;
@@ -20,7 +27,9 @@ import com.example.kk.ld01.utils.LDResponse;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -42,13 +51,36 @@ public class MainActivity extends AppCompatActivity {
     private CommonAdapter listAdapter;
     private long mExitTime = 0;
     private Gson gson;
+    private AVUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("test", "onCreate");
         setContentView(R.layout.activity_main);
         initViews();
-        initService();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("test", "onResume");
+//        getTasksByName(mUser.getUsername());
+    }
+
+    private void getTasksByName(String username) {
+        AVQuery<AVObject> query=new AVQuery<>("tasks");
+        query.whereEqualTo("username", username);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
     //禁用返回
@@ -70,9 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initService() {
+        if (mUser!=null){
+            getTasksByName(mUser.getUsername());
+        }
 
         //---------------------本地测试的分界线Begin----------------------
-        HttpUtils httpUtils=new HttpUtils();
+       /* HttpUtils httpUtils=new HttpUtils();
         httpUtils.send(HttpRequest.HttpMethod.GET,
                 "http://123.57.158.42:12306/tasks",
                 new RequestCallBack<String>() {
@@ -101,41 +136,25 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(HttpException error, String msg) {
                     }
-                });
+                });*/
         //---------------------本地测试的分界线End----------------------
-
-
     }
 
-    /**
-     * 绑定数据
-     */
-    private void bindData() {
-        gson=new Gson();
 
-        /*mTaskItemList = new ArrayList<>();
 
-        for (int i = 0; i <= 10; i++) {
-            mTaskItem = new TaskItem();
-            mTaskItem.setTaskTitle("Task1");
-            mTaskItem.setTaskContent("This is a test task");
-            mTaskItemList.add(mTaskItem);
-        }
+    private void initViews() {
 
-        mListView.setAdapter(new CommonAdapter<TaskItem>(MainActivity.this, mTaskItemList, R.layout.taskitem) {
-            @Override
-            public void convert(ViewHolder holder, TaskItem taskItem) {
-                holder.setText(R.id.task_title, taskItem.getTaskTitle());
-                holder.setText(R.id.task_content, taskItem.getTaskContent());
-            }
-        });
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_mainA);
+        mListView = (ListView) findViewById(R.id.listview_mainA);
+        mFAB= (AddFloatingActionButton) findViewById(R.id.fab_mainA);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(MainActivity.this,TaskDetailActivity.class));
-            }
-        });*/
+        mToolbar.setTitle(R.string.mainA_title);
+        mToolbar.setSubtitle(R.string.mainA_subtitle);
+
+        //识别不了color文件中的配置？？？
+        mToolbar.setTitleTextColor(0xffffffff);
+        mToolbar.setSubtitleTextColor(0xffffffff);
+        setSupportActionBar(mToolbar);
 
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +162,46 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, NewTaskActivity.class));
             }
         });
+
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        Toast.makeText(MainActivity.this, "action_search", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_filter:
+                        Toast.makeText(MainActivity.this, "action_filter", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_settings:
+                        Toast.makeText(MainActivity.this, "action_settings", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
+        //TODO 功能化ToolBar
+
+        //TODO 动态更新Menu
+
+        //TODO 采用可编辑的抽屉菜单作为ListItem
+
+        //TODO 添加CalendarView与下拉事件
+
+        //TODO 获取服务中的Task
+//        initService();
+        bindData();
+    }
+
+    /**
+     * 绑定数据
+     */
+    private void bindData() {
+        gson=new Gson();
 
 
         mTaskItemList=new ArrayList<>();
@@ -154,9 +213,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("test", mTaskItemList.toString());
-        /*BitmapUtils bitmapUtils=new BitmapUtils(this);
-        bitmapUtils.display(mImageView, adURL);
-        mListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false,true));*/
+        BitmapUtils bitmapUtils=new BitmapUtils(this);
+        mListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false,true));
         if (mTaskItemList==null)
         {
             Log.d("test", "itemlist为空");
@@ -188,34 +246,6 @@ public class MainActivity extends AppCompatActivity {
         };
         mListView.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
-    }
-
-    private void initViews() {
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_mainA);
-        mListView = (ListView) findViewById(R.id.listview_mainA);
-        mFAB= (AddFloatingActionButton) findViewById(R.id.fab_mainA);
-
-        mToolbar.setTitle(R.string.mainA_title);
-        mToolbar.setSubtitle(R.string.mainA_subtitle);
-
-        //识别不了color文件中的配置？？？
-        mToolbar.setTitleTextColor(0xffffffff);
-        mToolbar.setSubtitleTextColor(0xffffffff);
-        setSupportActionBar(mToolbar);
-
-
-
-        //TODO 功能化ToolBar
-
-        //TODO 动态更新Menu
-
-        //TODO 采用可编辑的抽屉菜单作为ListItem
-
-        //TODO 添加CalendarView与下拉事件
-
-        //TODO 获取服务中的Task
-
     }
 
     @Override

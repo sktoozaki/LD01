@@ -8,6 +8,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVUser;
 import com.example.kk.ld01.R;
 
 public class LaunchActivity extends Activity {
@@ -26,25 +28,27 @@ public class LaunchActivity extends Activity {
         animStart.setDuration(3000);
         animStart.setFillAfter(false);
 
-        animStart.setAnimationListener(new Animation.AnimationListener()
-        {
+        animStart.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationEnd(Animation animation)
-            {
-                Intent intent=new Intent(LaunchActivity.this, TitleActivity.class);
-                startActivity(intent);
+            public void onAnimationEnd(Animation animation) {
+                AVUser currentUser = AVUser.getCurrentUser();
+//                startActivity(new Intent(LaunchActivity.this, TitleActivity.class));
+
+                if (currentUser != null) {
+                    startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(LaunchActivity.this, TitleActivity.class));
+                }
                 finish();
             }
 
             @Override
-            public void onAnimationStart(Animation animation)
-            {
+            public void onAnimationStart(Animation animation) {
                 // TODO Auto-generated method stub
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation)
-            {
+            public void onAnimationRepeat(Animation animation) {
                 // TODO Auto-generated method stub
             }
         });

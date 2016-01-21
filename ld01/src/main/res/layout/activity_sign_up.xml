@@ -22,10 +22,10 @@
         />
 
     <EditText
-        android:id="@+id/email_signupA_edt"
+        android:id="@+id/username_signupA_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/main_email"
+        android:hint="@string/main_username"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
         />
@@ -35,12 +35,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/main_password"
+        android:inputType="textPassword"
+        android:ems="10"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
         />
 
+
     <EditText
-        android:id="@+id/ensure_password_signinA_edt"
+        android:id="@+id/repassword_signinA_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/main_ensure_password"
@@ -48,30 +51,35 @@
         android:textColorLink="@color/white"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        >
-        <TextView
+
+        <!--<TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/main_account"
             android:textColor="@color/white"
             android:layout_weight="1"
-            />
+            />-->
 
-        <Button
+
+        <com.rey.material.widget.Button
+            android:id="@+id/submit_signupA_btn"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right"
+            android:background="@drawable/btn_signin"
+            android:text="Submit"
+            />
+        <!--<Button
             android:id="@+id/signup_signupA_btn"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:background="@drawable/btn_signin"
-            />
+            />-->
 
-    </LinearLayout>
 
 
 </LinearLayout>

@@ -5,9 +5,10 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -17,14 +18,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.SaveCallback;
 import com.example.kk.ld01.R;
+import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.LDResponse;
 import com.github.clans.fab.FloatingActionMenu;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import java.util.Calendar;
 
@@ -51,6 +52,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private RadioGroup mTaskOptionsRadioGroup;
 
     private LDResponse ldResponse;
+    private AVUser mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,14 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         //识别不了color文件中的配置？？？
         mToolBar.setTitleTextColor(0xffffffff);
         setSupportActionBar(mToolBar);
+        mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                doCheck();
+                return true;
+            }
+        });
+
 
         mTaskStartTimeLL.setOnClickListener(this);
         mTaskEndTimeLL.setOnClickListener(this);
@@ -90,9 +101,31 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         initService();
     }
 
+    private void doCheck() {
+        if (TextUtils.isEmpty(mTaskTitle.getText().toString())) {
+            Toast.makeText(NewTaskActivity.this,"任务标题不能为空",Toast.LENGTH_SHORT).show();
+        } else {
+            createTask();
+        }
+    }
+
+    private void createTask() {
+        TaskItem task=new TaskItem();
+        task.setTaskTitle(mTaskTitle.getText().toString());
+        task.setTaskContent(mTaskContent.getText().toString());
+        task.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                Toast.makeText(NewTaskActivity.this,"任务保存成功！",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void initService() {
+        mUser=AVUser.getCurrentUser();
+
         //---------------------本地测试的分界线Begin----------------------
-        HttpUtils httpUtils=new HttpUtils();
+        /*HttpUtils httpUtils=new HttpUtils();
         httpUtils.send(HttpRequest.HttpMethod.GET,
                 "http://123.57.158.42:12306/newtask",
                 new RequestCallBack<String>() {
@@ -121,7 +154,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onFailure(HttpException error, String msg) {
                     }
-                });
+                });*/
         //---------------------本地测试的分界线End----------------------
     }
 

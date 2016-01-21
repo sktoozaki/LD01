@@ -1,18 +1,23 @@
 package com.example.kk.ld01.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.LogInCallback;
 import com.example.kk.ld01.R;
+import com.rey.material.widget.Button;
 
 public class SignInActivity extends Activity {
-    private Button btnSignin;
+    private EditText mUsermame;
+    private EditText mPassword;
+    private Button mSubmit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +27,43 @@ public class SignInActivity extends Activity {
 
 
     private void initViews() {
-        btnSignin= (Button) findViewById(R.id.signin_signinA_btn);
-        btnSignin.setOnClickListener(new View.OnClickListener() {
+        mUsermame = (EditText) findViewById(R.id.username_signinA_edt);
+        mPassword = (EditText) findViewById(R.id.password_signinA_edt);
+        mSubmit= (Button) findViewById(R.id.signin_signinA_btn);
+        mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this,MainActivity.class ));
+                startActivity(new Intent(SignInActivity.this, MainActivity.class));
             }
         });
     }
+
+    private void doValidate() {
+        if (mUsermame.getText().toString().length()<3)
+        {
+            Toast.makeText(SignInActivity.this, "用户名输入有误", Toast.LENGTH_SHORT).show();
+        }else {
+            if (mPassword.getText().toString().length()<6)
+            {
+                Toast.makeText(SignInActivity.this, "密码输入有误", Toast.LENGTH_SHORT).show();
+            }else {
+                doLogin();
+            }
+        }
+    }
+
+    private void doLogin() {
+        AVUser.logInInBackground(mUsermame.getText().toString(), mPassword.getText().toString(), new LogInCallback<AVUser>() {
+            @Override
+            public void done(AVUser avUser, AVException e) {
+                if (e==null){
+                    Toast.makeText(SignInActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignInActivity.this,MainActivity.class));
+                }else {
+                    Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }

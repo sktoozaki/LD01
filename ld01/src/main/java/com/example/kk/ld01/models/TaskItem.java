@@ -1,45 +1,31 @@
 package com.example.kk.ld01.models;
 
+import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.AVObject;
+
 /**
  * Created by KK on 2015/11/25.
  */
-public class TaskItem
+@AVClassName("tasks")
+public class TaskItem extends AVObject
 {
     private String taskTitle;
     private String taskContent;
-    private Integer taskCategory;
-
-    public String getTaskPriority() {
-        return taskPriority;
-    }
-
-    public void setTaskPriority(String taskPriority) {
-        this.taskPriority = taskPriority;
-    }
 
     public String getTaskTitle() {
-        return taskTitle;
+        return getString("tasktitle");
     }
 
     public void setTaskTitle(String taskTitle) {
-        this.taskTitle = taskTitle;
+        put("tasktitle",taskTitle);
     }
 
     public String getTaskContent() {
-        return taskContent;
+        return getString("taskcontent");
     }
 
     public void setTaskContent(String taskContent) {
-        this.taskContent = taskContent;
+        put("taskcontent",taskContent);
     }
 
-    public Integer getTaskCategory() {
-        return taskCategory;
-    }
-
-    public void setTaskCategory(Integer taskCategory) {
-        this.taskCategory = taskCategory;
-    }
-
-    private String taskPriority;
 }
