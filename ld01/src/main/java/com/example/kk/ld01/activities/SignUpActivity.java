@@ -58,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (e==null){
                     Toast.makeText(SignUpActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                    finish();
                 }else {
                     Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

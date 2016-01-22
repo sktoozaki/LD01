@@ -59,6 +59,7 @@ public class SignInActivity extends Activity {
                 if (e==null){
                     Toast.makeText(SignInActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignInActivity.this,MainActivity.class));
+                    finish();
                 }else {
                     Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

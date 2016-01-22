@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        getTasksByName(mUser.getUsername());
+        initService();
     }
 
     private void getTasksByName(String username) {
@@ -142,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_settings:
                         Toast.makeText(MainActivity.this, "action_settings", Toast.LENGTH_SHORT).show();
-
+                        mUser.logOut();
+                        finish();
+                        System.exit(0);
                         break;
                 }
 
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d("test", "itemlist为空");
         }else {
-            Log.d("test", list.get(2).getTaskContent());
+//            Log.d("test", list.get(2).getTaskContent());
         }
 
         listAdapter=new CommonAdapter<TaskItem>(this,list,R.layout.taskitem) {

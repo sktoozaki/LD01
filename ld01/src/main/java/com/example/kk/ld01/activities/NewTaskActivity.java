@@ -2,6 +2,7 @@ package com.example.kk.ld01.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -112,6 +113,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     private void createTask() {
         TaskItem task=new TaskItem();
+        task.setUserName(mUser.getUsername());
         task.setTaskTitle(mTaskTitle.getText().toString());
         task.setTaskContent(mTaskContent.getText().toString());
         task.saveInBackground(new SaveCallback() {
@@ -120,6 +122,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                 if (e==null)
                 {
                     Toast.makeText(NewTaskActivity.this,"任务保存成功！",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(NewTaskActivity.this,MainActivity.class));
+                    finish();
                 }else {
                     Log.d("test","NewTaskActivity-createTask:"+e.getMessage());
                 }

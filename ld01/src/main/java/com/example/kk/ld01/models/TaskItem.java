@@ -9,8 +9,18 @@ import com.avos.avoscloud.AVObject;
 @AVClassName("tasks")
 public class TaskItem extends AVObject
 {
+    private String userName;
+
     private String taskTitle;
+
     private String taskContent;
+    public String getUserName() {
+        return getString("username");
+    }
+
+    public void setUserName(String userName) {
+        put("username",userName);
+    }
 
     public String getTaskTitle() {
         return getString("tasktitle");
