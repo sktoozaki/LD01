@@ -33,7 +33,7 @@ public class SignInActivity extends Activity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                doValidate();
             }
         });
     }

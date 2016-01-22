@@ -6,14 +6,13 @@
 
     <ImageView
         android:id="@+id/task_category"
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="60dp"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:src="@drawable/meeting"/>
 
     <LinearLayout
-        android:paddingLeft="20dp"
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:layout_weight="3"
@@ -37,10 +36,10 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/task_priority"
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:src="@drawable/priority"/>
 
 </LinearLayout>

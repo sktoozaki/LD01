@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -116,7 +117,12 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         task.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
-                Toast.makeText(NewTaskActivity.this,"任务保存成功！",Toast.LENGTH_SHORT).show();
+                if (e==null)
+                {
+                    Toast.makeText(NewTaskActivity.this,"任务保存成功！",Toast.LENGTH_SHORT).show();
+                }else {
+                    Log.d("test","NewTaskActivity-createTask:"+e.getMessage());
+                }
             }
         });
     }
