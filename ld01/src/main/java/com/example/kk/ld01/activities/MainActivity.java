@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getTasksByName(String username) {
         AVQuery<TaskItem> query=AVObject.getQuery(TaskItem.class);
-        query.whereEqualTo("username", username);
+        query.whereEqualTo("userName", username);
         query.findInBackground(new FindCallback<TaskItem>() {
             @Override
             public void done(List<TaskItem> list, AVException e) {
@@ -69,19 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-       /* AVQuery<AVObject> query=new AVQuery<>("tasks");
-        query.whereEqualTo("username", username);
-        query.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null) {
-                    Log.d("test",list.size()+"条数据");
-                    bindTaskItem(list);
-                } else {
-                    Log.d("test","错误："+e.getMessage());
-                }
-            }
-        });*/
     }
 
     //禁用返回
@@ -127,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, NewTaskActivity.class));
+                finish();
             }
         });
 
@@ -170,20 +158,12 @@ public class MainActivity extends AppCompatActivity {
      * 绑定数据
      */
     private void bindTaskItem(List<TaskItem> list) {
-        gson=new Gson();
-
-        /*try {
-            mTaskItemList=gson.fromJson(ldResponse.getData().getJSONArray("tasks").toString(), new TypeToken<ArrayList<TaskItem>>() { }.getType());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
         Log.d("test", list.toString());
         if (list==null)
         {
             Log.d("test", "itemlist为空");
         }else {
-//            Log.d("test", list.get(2).getTaskContent());
+            Log.d("test", "itemlist不为空");
         }
 
         listAdapter=new CommonAdapter<TaskItem>(this,list,R.layout.taskitem) {
@@ -192,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
                 helper.setText(R.id.task_title, item.getTaskTitle())
                         .setText(R.id.task_content, item.getTaskContent());
             }
-
 
         };
         mListView.setAdapter(listAdapter);

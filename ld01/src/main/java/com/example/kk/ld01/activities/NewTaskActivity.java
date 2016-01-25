@@ -21,7 +21,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.example.kk.ld01.R;
@@ -29,14 +28,16 @@ import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.LDResponse;
 import com.github.clans.fab.FloatingActionMenu;
 
-import java.util.Calendar;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 
 /**
  * Created by KK on 2015/11/27.
  */
 public class NewTaskActivity extends AppCompatActivity implements View.OnClickListener
 {
-
     private Toolbar mToolBar;
     private LinearLayout mLayout;
     private FloatingActionMenu mMenu;
@@ -54,8 +55,13 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private RadioGroup mTaskOptionsRadioGroup;
 
     private LDResponse ldResponse;
-    private AVUser mUser;
-
+    private AVUser avUser;
+    private LocalDate taskStartDate;
+    private LocalDate taskEndDate;
+    private LocalTime taskStartTime;
+    private LocalTime taskEndTime;
+    private DateTime taskStartDateTime;
+    private DateTime taskEndDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +100,24 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        //TODO 重新设计默认显示的时间,设置过往时间不可选
+        mTaskStartDateTView.setText(LocalDate.now().toString("yyyy年MM月dd日"));
+        mTaskStartTimeTView.setText(LocalTime.now().toString("HH:mm"));
+        mTaskEndDateTView.setText(LocalDate.now().toString("yyyy年MM月dd日"));
+        mTaskEndTimeTView.setText(LocalTime.now().toString("HH:mm"));
 
         mTaskStartTimeLL.setOnClickListener(this);
         mTaskEndTimeLL.setOnClickListener(this);
         mTaskTypeLL.setOnClickListener(this);
 
-        //TODO 使用Joda-Time库的时间函数替代JAVA API
+        taskStartDate=new LocalDate(LocalDate.now().getYear(),LocalDate.now().getMonthOfYear(),LocalDate.now().getDayOfMonth());
+        taskStartTime=new LocalTime(LocalTime.now().getHourOfDay(),LocalTime.now().getMinuteOfHour());
+        taskEndDate=new LocalDate(LocalDate.now().getYear(),LocalDate.now().getMonthOfYear(),LocalDate.now().getDayOfMonth());
+        taskEndTime=new LocalTime(LocalTime.now().getHourOfDay(),LocalTime.now().getMinuteOfHour());
         initService();
     }
 
+    //TODO 检查任务条目的有效性
     private void doCheck() {
         if (TextUtils.isEmpty(mTaskTitle.getText().toString())) {
             Toast.makeText(NewTaskActivity.this,"任务标题不能为空",Toast.LENGTH_SHORT).show();
@@ -113,59 +128,31 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     private void createTask() {
         TaskItem task=new TaskItem();
-        task.setUserName(mUser.getUsername());
+        task.setUserName(avUser.getUsername());
         task.setTaskTitle(mTaskTitle.getText().toString());
         task.setTaskContent(mTaskContent.getText().toString());
+
+        taskStartDateTime=new DateTime(taskStartDate.getYear(),taskStartDate.getMonthOfYear(),taskStartDate.getDayOfMonth(),taskStartTime.getHourOfDay(),taskStartTime.getMinuteOfHour());
+        taskEndDateTime=new DateTime(taskEndDate.getYear(),taskEndDate.getMonthOfYear(),taskEndDate.getDayOfMonth(),taskEndTime.getHourOfDay(),taskEndTime.getMinuteOfHour());
+
+//        task.setTaskStartDateTime(taskStartDateTime);
+//        task.setTaskEndDateTime(taskEndDateTime);
         task.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
-                if (e==null)
-                {
-                    Toast.makeText(NewTaskActivity.this,"任务保存成功！",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(NewTaskActivity.this,MainActivity.class));
+                if (e == null) {
+                    Toast.makeText(NewTaskActivity.this, "任务保存成功！", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(NewTaskActivity.this, MainActivity.class));
                     finish();
-                }else {
-                    Log.d("test","NewTaskActivity-createTask:"+e.getMessage());
+                } else {
+                    Log.d("test", "NewTaskActivity-createTask:" + e.getMessage());
                 }
             }
         });
     }
 
     private void initService() {
-        mUser=AVUser.getCurrentUser();
-
-        //---------------------本地测试的分界线Begin----------------------
-        /*HttpUtils httpUtils=new HttpUtils();
-        httpUtils.send(HttpRequest.HttpMethod.GET,
-                "http://123.57.158.42:12306/newtask",
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onLoading(long total, long current, boolean isUploading) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        ldResponse = new LDResponse(responseInfo.result);
-                        if (ldResponse.getStatus() == 0) {
-                            Toast.makeText(NewTaskActivity.this, "LDResponse Parsing", Toast.LENGTH_SHORT).show();
-                            Log.d("test", "LDResponse Parsing");
-                            bindData();
-                        } else {
-                            //TODO 异常处理
-                            Toast.makeText(NewTaskActivity.this, "Not Parsing", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onFailure(HttpException error, String msg) {
-                    }
-                });*/
-        //---------------------本地测试的分界线End----------------------
+        avUser =AVUser.getCurrentUser();
     }
 
     private void bindData() {
@@ -181,7 +168,6 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        final Calendar calendar=Calendar.getInstance();
         switch (v.getId())
         {
             case R.id.task_type_ll_new_task_activity:
@@ -189,42 +175,44 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this,"task type",Toast.LENGTH_SHORT).show();
                 break;
 
+            //设置任务起始日期与时间
             case R.id.task_start_ll_new_task_activity:
                 Toast.makeText(this,"task start",Toast.LENGTH_SHORT).show();
                 new TimePickerDialog(NewTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mTaskStartTimeTView.setText(hourOfDay + "时" + minute + "分");
+                        taskStartTime=new LocalTime(hourOfDay,minute);
                     }
-                },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+                },LocalDateTime.now().getHourOfDay(),LocalDateTime.now().getMinuteOfHour(),true).show();
 
                 new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         mTaskStartDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+                        taskStartDate=new LocalDate(year,monthOfYear+1,dayOfMonth);
                     }
-                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-
-
+                },LocalDateTime.now().getYear(),LocalDateTime.now().getMonthOfYear(),LocalDateTime.now().getDayOfMonth()).show();
                 break;
 
+            //设置任务结束日期与时间
             case R.id.task_end_ll_new_task_activity:
                 Toast.makeText(this,"task end",Toast.LENGTH_SHORT).show();
-
                 new TimePickerDialog(NewTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mTaskEndTimeTView.setText(hourOfDay + "时" + minute + "分");
+                        taskEndTime=new LocalTime(hourOfDay,minute);
                     }
-                },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+                },LocalDateTime.now().getHourOfDay(),LocalDateTime.now().getMinuteOfHour(),true).show();
 
                 new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         mTaskEndDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+                        taskEndDate=new LocalDate(year,monthOfYear+1,dayOfMonth);
                     }
-                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-
+                },LocalDateTime.now().getYear(),LocalDateTime.now().getMonthOfYear(),LocalDateTime.now().getDayOfMonth()).show();
                 break;
 
             default:
