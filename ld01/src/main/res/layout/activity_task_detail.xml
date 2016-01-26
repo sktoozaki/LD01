@@ -14,6 +14,7 @@
         ></android.support.v7.widget.Toolbar>
 
     <TextView
+        android:id="@+id/title_tv_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="26sp"
@@ -23,7 +24,7 @@
         android:text="@string/title_task_detail_activity"
         />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -44,9 +45,10 @@
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
             />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <TextView
+        android:id="@+id/content_tv_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -84,6 +86,7 @@
                 android:text="START"/>
 
             <TextView
+                android:id="@+id/start_time_tv_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8 Apr.2015,10:56"/>
@@ -110,13 +113,14 @@
                 android:text="END"/>
 
             <TextView
+                android:id="@+id/end_time_tv_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9 Apr.2015,12:25"/>
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
+  <!--  <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
@@ -211,6 +215,6 @@
             android:text="@string/task_detail_activity_leave_comments"
             />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_mainA"
+            android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
@@ -18,18 +18,19 @@
 
 
     <LinearLayout
-        android:id="@+id/linearL_mainA"
+        android:id="@+id/linearL_main"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
         <RadioGroup
+            android:id="@+id/week_rg_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
             <RadioButton
-                android:id="@+id/rb1_mainA"
+                android:id="@+id/mon_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -37,12 +38,12 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
 
             <RadioButton
-                android:id="@+id/rb2_mainA"
+                android:id="@+id/tue_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -50,11 +51,11 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
             <RadioButton
-                android:id="@+id/rb3_mainA"
+                android:id="@+id/wed_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -62,11 +63,11 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
             <RadioButton
-                android:id="@+id/rb4_mainA"
+                android:id="@+id/thu_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -74,11 +75,11 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
             <RadioButton
-                android:id="@+id/rb5_mainA"
+                android:id="@+id/fri_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -86,11 +87,11 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
             <RadioButton
-                android:id="@+id/rb6_mainA"
+                android:id="@+id/sat_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -98,11 +99,11 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
 
             <RadioButton
-                android:id="@+id/rb7_mainA"
+                android:id="@+id/sun_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -110,7 +111,7 @@
                 android:gravity="center"
                 android:button="@null"
                 android:textColor="@color/text_maina"
-                android:background="@drawable/radiobtn_maina"
+                android:background="@drawable/radiobtn_main"
                 />
         </RadioGroup>
     </LinearLayout>
@@ -123,17 +124,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background_mainA"
+            android:background="@color/background_main"
             >
             <ListView
-                android:id="@+id/listview_mainA"
+                android:id="@+id/listview_main"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
         </LinearLayout>
 
         <com.getbase.floatingactionbutton.AddFloatingActionButton
-            android:id="@+id/fab_mainA"
+            android:id="@+id/fab_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

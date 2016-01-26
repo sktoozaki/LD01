@@ -1,13 +1,16 @@
 package com.example.kk.ld01.activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,12 +65,44 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private LocalTime taskEndTime;
     private DateTime taskStartDateTime;
     private DateTime taskEndDateTime;
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         initViews();
+    }
+
+    //禁用返回
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        // 连按两次返回键退出程序
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - exitTime) < 2000) {
+                finish();
+            }
+            exitTime = System.currentTimeMillis();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setMessage("确认放弃编辑吗？");
+            builder.setTitle("提示");
+            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    NewTaskActivity.this.finish();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.create().show();
+        }
+        return false;
     }
 
     private void initViews() {
@@ -135,8 +170,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         taskStartDateTime=new DateTime(taskStartDate.getYear(),taskStartDate.getMonthOfYear(),taskStartDate.getDayOfMonth(),taskStartTime.getHourOfDay(),taskStartTime.getMinuteOfHour());
         taskEndDateTime=new DateTime(taskEndDate.getYear(),taskEndDate.getMonthOfYear(),taskEndDate.getDayOfMonth(),taskEndTime.getHourOfDay(),taskEndTime.getMinuteOfHour());
 
-//        task.setTaskStartDateTime(taskStartDateTime);
-//        task.setTaskEndDateTime(taskEndDateTime);
+        task.setTaskStartDateTime(taskStartDateTime);
+        task.setTaskEndDateTime(taskEndDateTime);
         task.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
