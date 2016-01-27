@@ -59,10 +59,19 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     private LDResponse ldResponse;
     private AVUser avUser;
-    private LocalDate taskStartDate;
-    private LocalDate taskEndDate;
-    private LocalTime taskStartTime;
-    private LocalTime taskEndTime;
+
+    
+    private int yearStart;
+    private int yearEnd;
+    private int monthOfStartYear;
+    private int monthOfEndYear;
+    private int dayOfStartMonth;
+    private int dayOfEndMonth;
+    private int hourOfStartTime;
+    private int hourOfEndTime;
+    private int minuteOfStartHour;
+    private int minuteOfEndHour;
+    private DateTime dateTimeNow;
     private DateTime taskStartDateTime;
     private DateTime taskEndDateTime;
     private long exitTime = 0;
@@ -106,6 +115,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initViews() {
+        dateTimeNow=new DateTime();
         mToolBar= (Toolbar) findViewById(R.id.toolbar_newtaskA);
         mLayout= (LinearLayout) findViewById(R.id.linearL_newtaskA);
         mMenu= (FloatingActionMenu) findViewById(R.id.fab_menu_new_task_activity);
@@ -136,19 +146,14 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         //TODO 重新设计默认显示的时间,设置过往时间不可选
-        mTaskStartDateTView.setText(LocalDate.now().toString("yyyy年MM月dd日"));
-        mTaskStartTimeTView.setText(LocalTime.now().toString("HH:mm"));
-        mTaskEndDateTView.setText(LocalDate.now().toString("yyyy年MM月dd日"));
-        mTaskEndTimeTView.setText(LocalTime.now().toString("HH:mm"));
+        mTaskStartDateTView.setText(dateTimeNow.toString("yyyy年MM月dd日"));
+        mTaskStartTimeTView.setText(dateTimeNow.toString("HH:mm"));
+        mTaskEndDateTView.setText(dateTimeNow.toString("yyyy年MM月dd日"));
+        mTaskEndTimeTView.setText(dateTimeNow.toString("HH:mm"));
 
         mTaskStartTimeLL.setOnClickListener(this);
         mTaskEndTimeLL.setOnClickListener(this);
         mTaskTypeLL.setOnClickListener(this);
-
-        taskStartDate=new LocalDate(LocalDate.now().getYear(),LocalDate.now().getMonthOfYear(),LocalDate.now().getDayOfMonth());
-        taskStartTime=new LocalTime(LocalTime.now().getHourOfDay(),LocalTime.now().getMinuteOfHour());
-        taskEndDate=new LocalDate(LocalDate.now().getYear(),LocalDate.now().getMonthOfYear(),LocalDate.now().getDayOfMonth());
-        taskEndTime=new LocalTime(LocalTime.now().getHourOfDay(),LocalTime.now().getMinuteOfHour());
         initService();
     }
 
@@ -167,8 +172,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         task.setTaskTitle(mTaskTitle.getText().toString());
         task.setTaskContent(mTaskContent.getText().toString());
 
-        taskStartDateTime=new DateTime(taskStartDate.getYear(),taskStartDate.getMonthOfYear(),taskStartDate.getDayOfMonth(),taskStartTime.getHourOfDay(),taskStartTime.getMinuteOfHour());
-        taskEndDateTime=new DateTime(taskEndDate.getYear(),taskEndDate.getMonthOfYear(),taskEndDate.getDayOfMonth(),taskEndTime.getHourOfDay(),taskEndTime.getMinuteOfHour());
+        taskStartDateTime=new DateTime(yearStart,monthOfStartYear,dayOfStartMonth,hourOfStartTime,minuteOfStartHour);
+        taskEndDateTime=new DateTime(yearEnd,monthOfEndYear,dayOfEndMonth,hourOfEndTime,minuteOfEndHour);
 
         task.setTaskStartDateTime(taskStartDateTime);
         task.setTaskEndDateTime(taskEndDateTime);
@@ -217,17 +222,20 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mTaskStartTimeTView.setText(hourOfDay + "时" + minute + "分");
-                        taskStartTime=new LocalTime(hourOfDay,minute);
+                        hourOfStartTime=hourOfDay;
+                        minuteOfStartHour=minute;
                     }
-                },LocalDateTime.now().getHourOfDay(),LocalDateTime.now().getMinuteOfHour(),true).show();
+                },dateTimeNow.getHourOfDay(),dateTimeNow.getMinuteOfHour(),true).show();
 
                 new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         mTaskStartDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
-                        taskStartDate=new LocalDate(year,monthOfYear+1,dayOfMonth);
+                        yearStart=year;
+                        monthOfStartYear=monthOfYear+1;
+                        dayOfStartMonth=dayOfMonth;
                     }
-                },LocalDateTime.now().getYear(),LocalDateTime.now().getMonthOfYear(),LocalDateTime.now().getDayOfMonth()).show();
+                },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
                 break;
 
             //设置任务结束日期与时间
@@ -237,17 +245,20 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mTaskEndTimeTView.setText(hourOfDay + "时" + minute + "分");
-                        taskEndTime=new LocalTime(hourOfDay,minute);
+                        hourOfEndTime=hourOfDay;
+                        minuteOfEndHour=minute;
                     }
-                },LocalDateTime.now().getHourOfDay(),LocalDateTime.now().getMinuteOfHour(),true).show();
+                },dateTimeNow.getHourOfDay(),dateTimeNow.getMinuteOfHour(),true).show();
 
                 new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         mTaskEndDateTView.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
-                        taskEndDate=new LocalDate(year,monthOfYear+1,dayOfMonth);
+                        yearEnd=year;
+                        monthOfEndYear=monthOfYear+1;
+                        dayOfEndMonth=dayOfMonth;
                     }
-                },LocalDateTime.now().getYear(),LocalDateTime.now().getMonthOfYear(),LocalDateTime.now().getDayOfMonth()).show();
+                },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
                 break;
 
             default:

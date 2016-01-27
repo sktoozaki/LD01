@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -48,6 +49,9 @@ public class MainActivity extends BaseActivity {
 
     @ViewInject(R.id.listview_main)
     private ListView mListView;
+
+    @ViewInject(R.id.week_rg_main)
+    private RadioGroup mWeekRG;
 
     @ViewInject(R.id.mon_rb_main)
     private RadioButton mMonRB;
@@ -98,37 +102,6 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-
-    @Event(value = R.id.week_rg_main,type = RadioGroup.OnCheckedChangeListener.class)
-    private void onChecked(RadioGroup group, int checkedId){
-        switch (checkedId) {
-            case R.id.mon_rb_main:
-                Log.d("test", "mon");
-                break;
-            case R.id.tue_rb_main:
-
-                break;
-            case R.id.wed_rb_main:
-
-                break;
-            case R.id.thu_rb_main:
-
-                break;
-            case R.id.fri_rb_main:
-
-                break;
-            case R.id.sat_rb_main:
-
-                break;
-            case R.id.sun_rb_main:
-
-                break;
-            default:
-                break;
-        }
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,15 +112,15 @@ public class MainActivity extends BaseActivity {
         dateTimeNow=new DateTime();
         dateTimeThisWeek= getDateTimeThisWeek(dateTimeNow);
 
-        Log.d("test","Week:"+dateTimeNow.getDayOfWeek());
+        Log.d("test", "Week:" + dateTimeNow.getDayOfWeek());
         Log.d("test", "Day:" + dateTimeNow.getDayOfMonth());
 
         mMonRB.setText("Mon\n"+ dateTimeThisWeek.get(0).getDayOfMonth());
         mTueRB.setText("Tue\n"+ dateTimeThisWeek.get(1).getDayOfMonth());
         mWedRB.setText("Wed\n"+ dateTimeThisWeek.get(2).getDayOfMonth());
         mThuRB.setText("Thu\n"+ dateTimeThisWeek.get(3).getDayOfMonth());
-        mFriRB.setText("Fri\n"+ dateTimeThisWeek.get(4).getDayOfMonth());
-        mSatRB.setText("Sat\n"+ dateTimeThisWeek.get(5).getDayOfMonth());
+        mFriRB.setText("Fri\n" + dateTimeThisWeek.get(4).getDayOfMonth());
+        mSatRB.setText("Sat\n" + dateTimeThisWeek.get(5).getDayOfMonth());
         mSunRB.setText("Sun\n" + dateTimeThisWeek.get(6).getDayOfMonth());
         setFlag(dateTimeNow);
 
@@ -180,19 +153,37 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-
-        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mWeekRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(MainActivity.this,TaskDetailActivity.class);
-                Bundle data=new Bundle();
-                data.putSerializable("taskItem",taskList.get(position));
-                intent.putExtras(data);
-                startActivity(intent);
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.mon_rb_main:
+                        Log.d("test", "mon");
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(0));
+                        break;
+                    case R.id.tue_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(1));
+                        break;
+                    case R.id.wed_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(2));
+                        break;
+                    case R.id.thu_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(3));
+                        break;
+                    case R.id.fri_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(4));
+                        break;
+                    case R.id.sat_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(5));
+                        break;
+                    case R.id.sun_rb_main:
+                        getTasks(mUser.getUsername(),dateTimeThisWeek.get(6));
+                        break;
+                    default:
+                        break;
+                }
             }
-        });*/
-
+        });
 
 
         //TODO 功能化ToolBar
@@ -264,33 +255,25 @@ public class MainActivity extends BaseActivity {
         initService();
     }
 
-    private void getTasksByName(String username) {
-        AVQuery<TaskItem> query=AVObject.getQuery(TaskItem.class);
-        query.whereEqualTo("userName", username);
-        query.findInBackground(new FindCallback<TaskItem>() {
-            @Override
-            public void done(List<TaskItem> list, AVException e) {
-                if (e == null) {
-                    Log.d("test", list.size() + "条数据");
-                    bindTaskItem(list);
-                } else {
-                    Log.d("test", "错误：" + e.getMessage());
-                }
-            }
-        });
-    }
 
     private void getTasks(String username,DateTime dateTime) {
         AVQuery<TaskItem> query=AVObject.getQuery(TaskItem.class);
         query.whereEqualTo("userName", username);
+        //TODO 通过Fragment来划分每周显示的任务列表
+//        query.whereEqualTo("taskStartDateTime.getDayOfWeek()", dateTime.getDayOfWeek());
+        query.include("taskStartDateTime.getDayOfWeek()");
+        Log.d("test", "getTasksOf " + dateTime.getDayOfYear());
         query.findInBackground(new FindCallback<TaskItem>() {
             @Override
             public void done(List<TaskItem> list, AVException e) {
                 if (e == null) {
-                    Log.d("test",list.size()+"条数据");
+                    Log.d("test", "getTasks:" + list.size() + "条数据");
+                    for (TaskItem task : list) {
+                        Log.d("test", "日期"+task.getTaskStartDateTime().getDayOfYear());
+                    }
                     bindTaskItem(list);
                 } else {
-                    Log.d("test","错误："+e.getMessage());
+                    Log.d("test", "错误：" + e.getMessage());
                 }
             }
         });
@@ -316,7 +299,7 @@ public class MainActivity extends BaseActivity {
     private void initService() {
         mUser=AVUser.getCurrentUser();
         if (mUser!=null){
-            getTasksByName(mUser.getUsername());
+            getTasks(mUser.getUsername(),dateTimeNow);
         }else {
         }
     }
@@ -327,11 +310,13 @@ public class MainActivity extends BaseActivity {
     private void bindTaskItem(List<TaskItem> list) {
         if (list==null)
         {
-            Log.d("test", "itemlist为空");
+            Toast.makeText(MainActivity.this, "今天还没有设定任务喔", Toast.LENGTH_SHORT).show();
         }else {
             Log.d("test", "itemlist不为空");
             taskList=list;
         }
+
+
 
         listAdapter=new CommonAdapter<TaskItem>(this,list,R.layout.taskitem) {
             @Override
