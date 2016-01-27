@@ -8,16 +8,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kk.ld01.R;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 public class TitleActivity extends Activity {
 
     private Button btnSignup,btnSignin;
-    private HttpUtils httpUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +22,7 @@ public class TitleActivity extends Activity {
     private void initViews() {
         btnSignup = (Button) findViewById(R.id.signup_titleA_btn);
         btnSignin= (Button) findViewById(R.id.signin_titleA_btn);
-        httpUtils=new HttpUtils();
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

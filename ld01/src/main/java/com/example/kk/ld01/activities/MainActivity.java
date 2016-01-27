@@ -2,7 +2,6 @@ package com.example.kk.ld01.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,36 +24,114 @@ import com.example.kk.ld01.R;
 import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.BaseViewHolder;
 import com.example.kk.ld01.utils.CommonAdapter;
-import com.example.kk.ld01.utils.LDResponse;
-import com.getbase.floatingactionbutton.AddFloatingActionButton;
 
 import org.joda.time.DateTime;
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
 
-    private Toolbar mToolbar;
-    private ListView mListView;
-    private AddFloatingActionButton mFAB;
-    private RadioGroup mWeekRG;
-    private RadioButton mMonRB,mTueRB,mWedRB,mThuRB,mFriRB,mSatRB,mSunRB;
     private AVUser mUser;
-
     private List<TaskItem> taskList;
-    private TaskItem taskItem;
-    private LDResponse ldResponse;
     private CommonAdapter listAdapter;
     private long exitTime = 0;
     private DateTime dateTimeNow;
-    private int todayOfMonth;
     private List<DateTime> dateTimeThisWeek;
+
+    @ViewInject(R.id.toolbar_main)
+    private Toolbar mToolbar;
+
+    @ViewInject(R.id.listview_main)
+    private ListView mListView;
+
+    @ViewInject(R.id.mon_rb_main)
+    private RadioButton mMonRB;
+    @ViewInject(R.id.tue_rb_main)
+    private RadioButton mTueRB;
+    @ViewInject(R.id.wed_rb_main)
+    private RadioButton mWedRB;
+    @ViewInject(R.id.thu_rb_main)
+    private RadioButton mThuRB;
+    @ViewInject(R.id.fri_rb_main)
+    private RadioButton mFriRB;
+    @ViewInject(R.id.sat_rb_main)
+    private RadioButton mSatRB;
+    @ViewInject(R.id.sun_rb_main)
+    private RadioButton mSunRB;
+
+    @Event(value = R.id.fab_main)
+    private void onFabClick(View view){
+        startActivity(new Intent(MainActivity.this, NewTaskActivity.class));
+    }
+
+    @Event(value = R.id.listview_main,type = AdapterView.OnItemClickListener.class)
+    private void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        Intent intent=new Intent(MainActivity.this,TaskDetailActivity.class);
+        Bundle data=new Bundle();
+        data.putSerializable("taskItem",taskList.get(position));
+        intent.putExtras(data);
+        startActivity(intent);
+    }
+
+    @Event(value = R.id.toolbar_main,type = Toolbar.OnMenuItemClickListener.class)
+    private boolean onMenuItemClick(MenuItem item){
+        switch (item.getItemId())
+        {
+            case R.id.action_search:
+                Toast.makeText(MainActivity.this, "action_search", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_filter:
+                Toast.makeText(MainActivity.this, "action_filter", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_settings:
+                Toast.makeText(MainActivity.this, "action_settings", Toast.LENGTH_SHORT).show();
+                mUser.logOut();
+                finish();
+                System.exit(0);
+                break;
+        }
+        return true;
+    }
+
+
+    @Event(value = R.id.week_rg_main,type = RadioGroup.OnCheckedChangeListener.class)
+    private void onChecked(RadioGroup group, int checkedId){
+        switch (checkedId) {
+            case R.id.mon_rb_main:
+                Log.d("test", "mon");
+                break;
+            case R.id.tue_rb_main:
+
+                break;
+            case R.id.wed_rb_main:
+
+                break;
+            case R.id.thu_rb_main:
+
+                break;
+            case R.id.fri_rb_main:
+
+                break;
+            case R.id.sat_rb_main:
+
+                break;
+            case R.id.sun_rb_main:
+
+                break;
+            default:
+                break;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         initViews();
     }
 
@@ -63,20 +140,7 @@ public class MainActivity extends AppCompatActivity {
         dateTimeThisWeek= getDateTimeThisWeek(dateTimeNow);
 
         Log.d("test","Week:"+dateTimeNow.getDayOfWeek());
-        Log.d("test","Day:"+dateTimeNow.getDayOfMonth());
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        mListView = (ListView) findViewById(R.id.listview_main);
-        mFAB= (AddFloatingActionButton) findViewById(R.id.fab_main);
-
-        mWeekRG= (RadioGroup) findViewById(R.id.week_rg_main);
-        mMonRB= (RadioButton) findViewById(R.id.mon_rb_main);
-        mTueRB= (RadioButton) findViewById(R.id.tue_rb_main);
-        mWedRB= (RadioButton) findViewById(R.id.wed_rb_main);
-        mThuRB= (RadioButton) findViewById(R.id.thu_rb_main);
-        mFriRB= (RadioButton) findViewById(R.id.fri_rb_main);
-        mSatRB= (RadioButton) findViewById(R.id.sat_rb_main);
-        mSunRB= (RadioButton) findViewById(R.id.sun_rb_main);
+        Log.d("test", "Day:" + dateTimeNow.getDayOfMonth());
 
         mMonRB.setText("Mon\n"+ dateTimeThisWeek.get(0).getDayOfMonth());
         mTueRB.setText("Tue\n"+ dateTimeThisWeek.get(1).getDayOfMonth());
@@ -84,53 +148,16 @@ public class MainActivity extends AppCompatActivity {
         mThuRB.setText("Thu\n"+ dateTimeThisWeek.get(3).getDayOfMonth());
         mFriRB.setText("Fri\n"+ dateTimeThisWeek.get(4).getDayOfMonth());
         mSatRB.setText("Sat\n"+ dateTimeThisWeek.get(5).getDayOfMonth());
-        mSunRB.setText("Sun\n"+ dateTimeThisWeek.get(6).getDayOfMonth());
+        mSunRB.setText("Sun\n" + dateTimeThisWeek.get(6).getDayOfMonth());
         setFlag(dateTimeNow);
-
-        mWeekRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId)
-                {
-                    case R.id.mon_rb_main:
-
-                        break;
-                    case R.id.tue_rb_main:
-
-                        break;
-                    case R.id.wed_rb_main:
-
-                        break;
-                    case R.id.thu_rb_main:
-
-                        break;
-                    case R.id.fri_rb_main:
-
-                        break;
-                    case R.id.sat_rb_main:
-
-                        break;
-                    case R.id.sun_rb_main:
-
-                        break;
-                }
-            }
-        });
 
         mToolbar.setTitle(R.string.mainA_title);
         mToolbar.setSubtitle(dateTimeNow.toString("yyyy年MM月dd日"));
 
-        //识别不了color文件中的配置？？？
+        //BUG:识别不了color文件中的配置
         mToolbar.setTitleTextColor(0xffffffff);
         mToolbar.setSubtitleTextColor(0xffffffff);
         setSupportActionBar(mToolbar);
-
-        mFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NewTaskActivity.class));
-            }
-        });
 
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -149,12 +176,13 @@ public class MainActivity extends AppCompatActivity {
                         System.exit(0);
                         break;
                 }
-
                 return true;
             }
         });
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(MainActivity.this,TaskDetailActivity.class);
@@ -163,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(data);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
 
@@ -178,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO 获取服务中的Task
         initService();
     }
+
+
 
     //获取本周每一天的DateTime
     private List<DateTime> getDateTimeThisWeek(DateTime dateTimeNow) {
