@@ -16,6 +16,7 @@ public class LDApplication extends Application{
     public void onCreate() {
         super.onCreate();
         x.Ext.init(this);
+        x.Ext.setDebug(true);
         AVObject.registerSubclass(TaskItem.class);
         AVOSCloud.initialize(this, "CcdwJeS2XKTr3eOscyOKwVmx-gzGzoHsz", "p8TWYwkySzwc1Ch47JgrmA4A");
     }

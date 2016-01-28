@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity android:name=".activities.NewTaskActivity"
+                  android:windowSoftInputMode="stateVisible"
                   android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.MainActivity"

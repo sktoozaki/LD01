@@ -134,7 +134,6 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
 
         mToolBar.setNavigationIcon(R.drawable.arrow_back);
         mToolBar.setTitle("New Task");
-        //识别不了color文件中的配置？？？
         mToolBar.setTitleTextColor(0xffffffff);
         setSupportActionBar(mToolBar);
         mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

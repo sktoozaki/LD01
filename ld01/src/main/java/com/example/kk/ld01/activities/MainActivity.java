@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Event(value = R.id.toolbar_main,type = Toolbar.OnMenuItemClickListener.class)
-    private boolean onMenuItemClick(MenuItem item){
+    private void onMenuItemClick(MenuItem item){
         switch (item.getItemId())
         {
             case R.id.action_search:
@@ -99,8 +99,9 @@ public class MainActivity extends BaseActivity {
                 System.exit(0);
                 break;
         }
-        return true;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +133,7 @@ public class MainActivity extends BaseActivity {
         mToolbar.setSubtitleTextColor(0xffffffff);
         setSupportActionBar(mToolbar);
 
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        /*mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
@@ -151,7 +152,7 @@ public class MainActivity extends BaseActivity {
                 }
                 return true;
             }
-        });
+        });*/
 
         mWeekRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
