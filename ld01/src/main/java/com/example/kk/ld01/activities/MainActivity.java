@@ -1,5 +1,7 @@
 package com.example.kk.ld01.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +24,7 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.example.kk.ld01.R;
+import com.example.kk.ld01.fragments.DayFragment;
 import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.BaseViewHolder;
 import com.example.kk.ld01.utils.CommonAdapter;
@@ -43,6 +46,12 @@ public class MainActivity extends BaseActivity {
     private long exitTime = 0;
     private DateTime dateTimeNow;
     private List<DateTime> dateTimeThisWeek;
+    private enum days{
+        MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRADAY,SATURDAY,SUNDAY
+    };
+
+    @ViewInject(R.id.framelayout_main)
+    private FrameLayout mFrame;
 
     @ViewInject(R.id.toolbar_main)
     private Toolbar mToolbar;
@@ -160,6 +169,7 @@ public class MainActivity extends BaseActivity {
                 switch (checkedId) {
                     case R.id.mon_rb_main:
                         Log.d("test", "mon");
+                        loadFragment(days.MONDAY);
                         getTasks(mUser.getUsername(),dateTimeThisWeek.get(0));
                         break;
                     case R.id.tue_rb_main:
@@ -186,6 +196,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        setDefaultFragment();
 
         //TODO 功能化ToolBar
 
@@ -199,6 +210,16 @@ public class MainActivity extends BaseActivity {
         initService();
     }
 
+    private void setDefaultFragment() {
+        FragmentManager fragment=getFragmentManager();
+        FragmentTransaction transaction=fragment.beginTransaction();
+        DayFragment mDayFragment=new DayFragment(dateTimeNow);
+    }
+
+    private void loadFragment(days day) {
+
+
+    }
 
 
     //获取本周每一天的DateTime
@@ -261,6 +282,7 @@ public class MainActivity extends BaseActivity {
         AVQuery<TaskItem> query=AVObject.getQuery(TaskItem.class);
         query.whereEqualTo("userName", username);
         //TODO 通过Fragment来划分每周显示的任务列表
+        //TODO 测试通过DayOfYear来获取任务
 //        query.whereEqualTo("taskStartDateTime.getDayOfWeek()", dateTime.getDayOfWeek());
         query.include("taskStartDateTime.getDayOfWeek()");
         Log.d("test", "getTasksOf " + dateTime.getDayOfYear());
