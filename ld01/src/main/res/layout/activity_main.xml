@@ -116,9 +116,13 @@
         </RadioGroup>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/framelayout_main"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></LinearLayout>
 
     <FrameLayout
-        android:id="@+id/framelayout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

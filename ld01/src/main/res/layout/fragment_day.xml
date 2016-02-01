@@ -3,6 +3,19 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textview_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="没有任务"
+        android:textStyle="italic"
+        android:paddingTop="20dp"
+        android:textSize="36dp"
+        android:textColor="@color/grey"
+        android:layout_gravity="center|top"
+        />
+
     <ScrollView
         android:id="@+id/scrollview_day"
         android:layout_width="match_parent"

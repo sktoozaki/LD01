@@ -9,4 +9,5 @@
     <color name="background_main">#F0F0F0</color>
     <color name="task_detail">#13C4A9</color>
     <color name="blur">#ccffffff</color>
+    <color name="grey">#909090</color>
 </resources>
