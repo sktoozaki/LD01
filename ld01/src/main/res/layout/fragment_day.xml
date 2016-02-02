@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+             xmlns:fab="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listview_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"></ListView>
 
     <TextView
         android:id="@+id/textview_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="没有任务"
-        android:textStyle="italic"
-        android:paddingTop="20dp"
-        android:textSize="36dp"
-        android:textColor="@color/grey"
         android:layout_gravity="center|top"
+        android:paddingTop="20dp"
+        android:textColor="@color/grey"
+        android:textSize="36dp"
+        android:textStyle="italic"
         />
 
-    <ScrollView
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/fab_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            fab:fab_addButtonColorNormal="@color/background"
+            fab:fab_addButtonColorPressed="@color/background"
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_labelStyle="@style/menu_labels_style"/>
+
+
+
+
+
+    <!--<ScrollView
         android:id="@+id/scrollview_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,5 +56,5 @@
         </com.example.kk.ld01.views.MyListView>
 
     </ScrollView>
-
+-->
 </FrameLayout>

@@ -9,5 +9,10 @@
     <color name="background_main">#F0F0F0</color>
     <color name="task_detail">#13C4A9</color>
     <color name="blur">#ccffffff</color>
+
     <color name="grey">#909090</color>
+    <color name="grdey">#FFDA4336</color>
+    <color name="grdey2">#FFE75043</color>
+    <color name="grdey3">#FFAAAAAA</color>
+    <color name="grdey4">#99FFFFFF</color>
 </resources>

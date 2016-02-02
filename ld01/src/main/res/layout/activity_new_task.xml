@@ -285,9 +285,8 @@
             android:id="@+id/contact_fab_mainA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/male_user"
+            android:src="@drawable/m11"
             fab:fab_label="Contact"
-            fab:fab_colorNormal="@color/background"
             fab:fab_colorPressed="@color/white"
             />
 
@@ -295,9 +294,9 @@
             android:id="@+id/location_fab_mainA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pointer"
+            android:scaleType="fitCenter"
+            android:src="@drawable/m13"
             fab:fab_label="Location"
-            fab:fab_colorNormal="@color/background"
             fab:fab_colorPressed="@color/white"
             />
 
@@ -305,9 +304,9 @@
             android:id="@+id/microphone_fab_mainA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/microphone"
+            android:scaleType="fitCenter"
+            android:src="@drawable/m12"
             fab:fab_label="Voice"
-            fab:fab_colorNormal="@color/background"
             fab:fab_colorPressed="@color/white"
             />
 
@@ -315,9 +314,8 @@
             android:id="@+id/video_fab_mainA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/video"
+            android:src="@drawable/a12"
             fab:fab_label="Video"
-            fab:fab_colorNormal="@color/background"
             fab:fab_colorPressed="@color/white"
             />
 
@@ -327,7 +325,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/photo"
             fab:fab_label="Photo"
-            fab:fab_colorNormal="@color/background"
             fab:fab_colorPressed="@color/white"
             />
 

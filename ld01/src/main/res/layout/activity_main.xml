@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:fab="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            ></android.support.v7.widget.Toolbar>
-
-
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        ></android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearL_main"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:orientation="vertical">
 
         <RadioGroup
             android:id="@+id/week_rg_main"
@@ -29,16 +24,17 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
+
             <RadioButton
                 android:id="@+id/mon_rb_main"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Mon\n6"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Mon\n6"
+                android:textColor="@color/text_maina"
                 />
 
 
@@ -47,11 +43,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Tue\n7"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Tue\n7"
+                android:textColor="@color/text_maina"
                 />
 
             <RadioButton
@@ -59,11 +55,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Wed\n8"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Wed\n8"
+                android:textColor="@color/text_maina"
                 />
 
             <RadioButton
@@ -71,11 +67,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Thu\n9"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Thu\n9"
+                android:textColor="@color/text_maina"
                 />
 
             <RadioButton
@@ -83,11 +79,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Fri\n10"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Fri\n10"
+                android:textColor="@color/text_maina"
                 />
 
             <RadioButton
@@ -95,11 +91,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Sat\n11"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Sat\n11"
+                android:textColor="@color/text_maina"
                 />
 
             <RadioButton
@@ -107,60 +103,19 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Sun\n12"
-                android:gravity="center"
-                android:button="@null"
-                android:textColor="@color/text_maina"
                 android:background="@drawable/radiobtn_main"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Sun\n12"
+                android:textColor="@color/text_maina"
                 />
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/framelayout_main"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
-
     <FrameLayout
+        android:id="@+id/framelayout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"></FrameLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_main"
-            >
-            <ListView
-                android:id="@+id/listview_main"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
-        </LinearLayout>
-
-        <com.getbase.floatingactionbutton.AddFloatingActionButton
-            android:id="@+id/fab_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            fab:fab_addButtonColorNormal="@color/background"
-            fab:fab_addButtonColorPressed="@color/background"
-            fab:fab_addButtonPlusIconColor="@color/white"
-            fab:fab_labelStyle="@style/menu_labels_style"
-            android:layout_gravity="bottom|right"/>
-
-    </FrameLayout>
-
-
-   <!-- <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        />-->
 </LinearLayout>

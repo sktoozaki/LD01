@@ -29,6 +29,7 @@ import com.avos.avoscloud.SaveCallback;
 import com.example.kk.ld01.R;
 import com.example.kk.ld01.models.TaskItem;
 import com.example.kk.ld01.utils.LDResponse;
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import org.joda.time.DateTime;
@@ -44,6 +45,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private Toolbar mToolBar;
     private LinearLayout mLayout;
     private FloatingActionMenu mMenu;
+    private FloatingActionButton mFab;
     private TextView mTaskTitle;
     private TextView mTaskContent;
     private TextView mTaskStartDateTView;
@@ -131,6 +133,8 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mTaskTypeOptionsLL= (LinearLayout) findViewById(R.id.task_type_options_new_task_activity);
         mTaskTypeImg= (ImageView) findViewById(R.id.task_type_img_new_task_activity);
         mTaskOptionsRadioGroup= (RadioGroup) findViewById(R.id.task_options_rg_new_task_activity);
+        mFab= (FloatingActionButton) findViewById(R.id.contact_fab_mainA);
+//        mFab.setColorNormal(0x000000);
 
         mToolBar.setNavigationIcon(R.drawable.arrow_back);
         mToolBar.setTitle("New Task");
