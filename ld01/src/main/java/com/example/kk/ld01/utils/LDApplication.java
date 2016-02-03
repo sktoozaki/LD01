@@ -1,6 +1,11 @@
 package com.example.kk.ld01.utils;
 
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Binder;
+import android.os.IBinder;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
@@ -19,5 +24,8 @@ public class LDApplication extends Application{
         x.Ext.setDebug(true);
         AVObject.registerSubclass(TaskItem.class);
         AVOSCloud.initialize(this, "CcdwJeS2XKTr3eOscyOKwVmx-gzGzoHsz", "p8TWYwkySzwc1Ch47JgrmA4A");
+        Intent intent=new Intent();
+        intent.setAction(".services.AlarmService");
+        startService(intent);
     }
 }
