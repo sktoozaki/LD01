@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -45,7 +46,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private Toolbar mToolBar;
     private LinearLayout mLayout;
     private FloatingActionMenu mMenu;
-    private FloatingActionButton mFab;
+    private FloatingActionButton mContactFab;
     private TextView mTaskTitle;
     private TextView mTaskContent;
     private TextView mTaskStartDateTView;
@@ -133,7 +134,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mTaskTypeOptionsLL= (LinearLayout) findViewById(R.id.task_type_options_new_task_activity);
         mTaskTypeImg= (ImageView) findViewById(R.id.task_type_img_new_task_activity);
         mTaskOptionsRadioGroup= (RadioGroup) findViewById(R.id.task_options_rg_new_task_activity);
-        mFab= (FloatingActionButton) findViewById(R.id.contact_fab_mainA);
+        mContactFab= (FloatingActionButton) findViewById(R.id.contact_fab_mainA);
 //        mFab.setColorNormal(0x000000);
 
         mToolBar.setNavigationIcon(R.drawable.arrow_back);
@@ -157,6 +158,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mTaskStartTimeLL.setOnClickListener(this);
         mTaskEndTimeLL.setOnClickListener(this);
         mTaskTypeLL.setOnClickListener(this);
+        mContactFab.setOnClickListener(this);
         initService();
     }
 
@@ -263,6 +265,9 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
                 break;
+
+            case R.id.contact_fab_mainA:
+                startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI),1);
 
             default:
                 break;
