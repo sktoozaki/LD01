@@ -1,4 +1,4 @@
-package com.example.kk.ld01.activities;
+package com.example.kk.ld01.activities.Launch;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUser;
 import com.example.kk.ld01.R;
+import com.example.kk.ld01.activities.MainActivity;
+import com.example.kk.ld01.activities.TitleActivity;
 
 public class LaunchActivity extends Activity {
     private ImageView mLogo,mDot1,mDot2,mDot3;
-    private LinearLayout mLayout;
+    private RelativeLayout mLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class LaunchActivity extends Activity {
 
     private void initViews() {
         Animation animStart= AnimationUtils.loadAnimation(this, R.anim.fade);
-        final LinearLayout mLayout=(LinearLayout) findViewById(R.id.launch_layout);
+        mLayout=(RelativeLayout) findViewById(R.id.launch_layout);
         animStart.setDuration(3000);
         animStart.setFillAfter(false);
 

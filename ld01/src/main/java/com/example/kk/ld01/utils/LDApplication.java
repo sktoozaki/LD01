@@ -24,8 +24,5 @@ public class LDApplication extends Application{
         x.Ext.setDebug(true);
         AVObject.registerSubclass(TaskItem.class);
         AVOSCloud.initialize(this, "CcdwJeS2XKTr3eOscyOKwVmx-gzGzoHsz", "p8TWYwkySzwc1Ch47JgrmA4A");
-        Intent intent=new Intent();
-        intent.setAction(".services.AlarmService");
-        startService(intent);
     }
 }

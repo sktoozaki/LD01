@@ -12,25 +12,25 @@ public class AlarmService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        Log.d("test","onBind");
+        Log.d("test","Service onBind");
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("test","onDestroy");
+        Log.d("test","Service onDestroy");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("test","onStartCommand");
+        Log.d("test","Service onStartCommand");
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("test", "onCreate");
+        Log.d("test", "Service onCreate");
     }
 }

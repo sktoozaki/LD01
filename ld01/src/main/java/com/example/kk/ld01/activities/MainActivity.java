@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,6 +24,7 @@ import org.joda.time.DateTime;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +92,7 @@ public class MainActivity extends BaseActivity {
     }*/
 
     @Event(value = R.id.toolbar_main, type = Toolbar.OnMenuItemClickListener.class)
-    private void onMenuItemClick(MenuItem item) {
+    private boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
                 Toast.makeText(MainActivity.this, "action_search", Toast.LENGTH_SHORT).show();
@@ -105,11 +107,13 @@ public class MainActivity extends BaseActivity {
                 System.exit(0);
                 break;
         }
+        return true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        x.view().inject(MainActivity.this);
         initViews();
     }
 
@@ -167,37 +171,44 @@ public class MainActivity extends BaseActivity {
         mToolbar.setSubtitleTextColor(0xffffffff);
         setSupportActionBar(mToolbar);
 
+        mWedRB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mWeekRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.mon_rb_main:
                         Log.d("test", "mon");
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(0));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(0));
                         loadFragment(dateTimeThisWeek.get(0));
                         break;
                     case R.id.tue_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(1));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(1));
                         loadFragment(dateTimeThisWeek.get(1));
                         break;
                     case R.id.wed_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(2));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(2));
                         loadFragment(dateTimeThisWeek.get(2));
                         break;
                     case R.id.thu_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(3));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(3));
                         loadFragment(dateTimeThisWeek.get(3));
                         break;
                     case R.id.fri_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(4));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(4));
                         loadFragment(dateTimeThisWeek.get(4));
                         break;
                     case R.id.sat_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(5));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(5));
                         loadFragment(dateTimeThisWeek.get(5));
                         break;
                     case R.id.sun_rb_main:
-//                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(6));
+                        //                        getTasks(mUser.getUsername(), dateTimeThisWeek.get(6));
                         loadFragment(dateTimeThisWeek.get(6));
                         break;
                     default:

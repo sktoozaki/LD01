@@ -1,7 +1,9 @@
 package com.example.kk.ld01.activities;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +40,13 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
+import rx.Observable;
+import rx.Observer;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by KK on 2015/11/27.
  */
@@ -59,6 +68,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout mTaskTypeOptionsLL;
     private ImageView mTaskTypeImg;
     private RadioGroup mTaskOptionsRadioGroup;
+    private AlarmManager alarmManager;
 
     private LDResponse ldResponse;
     private AVUser avUser;
@@ -78,6 +88,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private DateTime taskStartDateTime;
     private DateTime taskEndDateTime;
     private long exitTime = 0;
+    private String TAG="NewTaskActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +147,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mTaskOptionsRadioGroup= (RadioGroup) findViewById(R.id.task_options_rg_new_task_activity);
         mContactFab= (FloatingActionButton) findViewById(R.id.contact_fab_mainA);
 //        mFab.setColorNormal(0x000000);
+        alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
 
         mToolBar.setNavigationIcon(R.drawable.arrow_back);
         mToolBar.setTitle("New Task");
@@ -180,6 +192,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         taskStartDateTime=new DateTime(yearStart,monthOfStartYear,dayOfStartMonth,hourOfStartTime,minuteOfStartHour);
         taskEndDateTime=new DateTime(yearEnd,monthOfEndYear,dayOfEndMonth,hourOfEndTime,minuteOfEndHour);
 
+
         task.setTaskStartDateTime(taskStartDateTime);
         task.setTaskEndDateTime(taskEndDateTime);
         task.saveInBackground(new SaveCallback() {
@@ -194,10 +207,45 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         });
+        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent alarmIntent=new Intent(NewTaskActivity.this,AlarmActivity.class);
+        PendingIntent pi=PendingIntent.getActivity(NewTaskActivity.this,0,alarmIntent,0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, taskStartDateTime.getMillis(), pi);
     }
 
     private void initService() {
         avUser =AVUser.getCurrentUser();
+        Observer<String> observer=new Observer<String>() {
+            @Override
+            public void onCompleted() {
+                Log.d(TAG, "onCompleted: ");
+                Toast.makeText(NewTaskActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: ");
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "onNext: "+s);
+                Toast.makeText(NewTaskActivity.this, s,Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        Observable<String> observable=Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("Hi");
+                subscriber.onNext("Jean");
+                subscriber.onNext("KK");
+                subscriber.onCompleted();
+            }
+        });
+
+
+
     }
 
     private void bindData() {
@@ -229,6 +277,9 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                         mTaskStartTimeTView.setText(hourOfDay + "时" + minute + "分");
                         hourOfStartTime=hourOfDay;
                         minuteOfStartHour=minute;
+                        Intent intent=new Intent(NewTaskActivity.this,AlarmActivity.class);
+                        PendingIntent pi=PendingIntent.getActivity(NewTaskActivity.this,0,intent,0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,taskStartDateTime.getMillis(),pi);
                     }
                 },dateTimeNow.getHourOfDay(),dateTimeNow.getMinuteOfHour(),true).show();
 
@@ -241,6 +292,9 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                         dayOfStartMonth=dayOfMonth;
                     }
                 },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
+
+
+
                 break;
 
             //设置任务结束日期与时间
@@ -264,6 +318,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                         dayOfEndMonth=dayOfMonth;
                     }
                 },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
+
                 break;
 
             case R.id.contact_fab_mainA:
