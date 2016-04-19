@@ -234,6 +234,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Assign To"
+                    android:gravity="center"
+                    android:textColor="@color/background"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/assign_to_tv_new_task_activity"
+                    android:text="JeanKK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.github.clans.fab.FloatingActionMenu
@@ -339,43 +367,6 @@
             />
 
     </com.github.clans.fab.FloatingActionMenu>
-
-    <LinearLayout
-        android:id="@+id/task_type_options_new_task_activity"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blur"
-        android:gravity="center"
-        >
-
-        <RadioGroup
-            android:id="@+id/task_options_rg_new_task_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.rey.material.widget.RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/task_type_1"
-                android:checked="true"
-                />
-            <com.rey.material.widget.RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/task_type_2"
-                />
-            <com.rey.material.widget.RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/task_type_3"
-                />
-            <com.rey.material.widget.RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/task_type_4"
-                />
-        </RadioGroup>
-    </LinearLayout>
 
 
 </FrameLayout>

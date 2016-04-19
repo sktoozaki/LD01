@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -36,16 +38,10 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 
 import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by KK on 2015/11/27.
@@ -65,10 +61,10 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout mTaskStartTimeLL;
     private LinearLayout mTaskEndTimeLL;
     private LinearLayout mTaskTypeLL;
-    private LinearLayout mTaskTypeOptionsLL;
     private ImageView mTaskTypeImg;
     private RadioGroup mTaskOptionsRadioGroup;
     private AlarmManager alarmManager;
+    private TextView mAssignToTView;
 
     private LDResponse ldResponse;
     private AVUser avUser;
@@ -89,12 +85,31 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
     private DateTime taskEndDateTime;
     private long exitTime = 0;
     private String TAG="NewTaskActivity";
+    private final int GETCONTACT=10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         initViews();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case GETCONTACT:
+                // TODO: 2016/4/19 优化Fab关闭效果
+                mMenu.close(false);
+                Uri uri=data.getData();
+                Cursor cursor=getContentResolver().query(uri, null, null, null, null);
+                cursor.moveToFirst();
+                String name=cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                mAssignToTView.setText(name);
+                break;
+
+            default:break;
+        }
     }
 
     //禁用返回
@@ -142,10 +157,9 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         mTaskStartTimeLL= (LinearLayout) findViewById(R.id.task_start_ll_new_task_activity);
         mTaskEndTimeLL= (LinearLayout) findViewById(R.id.task_end_ll_new_task_activity);
         mTaskTypeLL= (LinearLayout) findViewById(R.id.task_type_ll_new_task_activity);
-        mTaskTypeOptionsLL= (LinearLayout) findViewById(R.id.task_type_options_new_task_activity);
         mTaskTypeImg= (ImageView) findViewById(R.id.task_type_img_new_task_activity);
-        mTaskOptionsRadioGroup= (RadioGroup) findViewById(R.id.task_options_rg_new_task_activity);
         mContactFab= (FloatingActionButton) findViewById(R.id.contact_fab_mainA);
+        mAssignToTView= (TextView) findViewById(R.id.assign_to_tv_new_task_activity);
 //        mFab.setColorNormal(0x000000);
         alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -264,8 +278,6 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId())
         {
             case R.id.task_type_ll_new_task_activity:
-                mTaskTypeOptionsLL.setVisibility(View.VISIBLE);
-                Toast.makeText(this,"task type",Toast.LENGTH_SHORT).show();
                 break;
 
             //设置任务起始日期与时间
@@ -292,9 +304,6 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                         dayOfStartMonth=dayOfMonth;
                     }
                 },dateTimeNow.minusYears(1).getYear(),dateTimeNow.minusMonths(1).getMonthOfYear(),dateTimeNow.getDayOfMonth()).show();
-
-
-
                 break;
 
             //设置任务结束日期与时间
@@ -322,7 +331,7 @@ public class NewTaskActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.contact_fab_mainA:
-                startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI),1);
+                startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI),GETCONTACT);
 
             default:
                 break;

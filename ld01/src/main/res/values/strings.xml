@@ -45,4 +45,5 @@
     <string name="task_type_2">Travel</string>
     <string name="task_type_3">Call</string>
     <string name="task_type_4">Idea</string>
+    <string name="icons">&#xe775;&#xe779;</string>
 </resources>

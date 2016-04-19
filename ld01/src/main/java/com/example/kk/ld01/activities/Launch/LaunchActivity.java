@@ -13,19 +13,23 @@ import com.example.kk.ld01.R;
 import com.example.kk.ld01.activities.MainActivity;
 import com.example.kk.ld01.activities.TitleActivity;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class LaunchActivity extends Activity {
-    private ImageView mLogo,mDot1,mDot2,mDot3;
-    private RelativeLayout mLayout;
+
+    @Bind(R.id.launch_layout) RelativeLayout mLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        ButterKnife.bind(this);
         initViews();
     }
 
     private void initViews() {
         Animation animStart= AnimationUtils.loadAnimation(this, R.anim.fade);
-        mLayout=(RelativeLayout) findViewById(R.id.launch_layout);
         animStart.setDuration(3000);
         animStart.setFillAfter(false);
 
@@ -33,7 +37,6 @@ public class LaunchActivity extends Activity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 AVUser currentUser = AVUser.getCurrentUser();
-//                startActivity(new Intent(LaunchActivity.this, TitleActivity.class));
 
                 if (currentUser != null) {
                     startActivity(new Intent(LaunchActivity.this, MainActivity.class));
@@ -45,12 +48,10 @@ public class LaunchActivity extends Activity {
 
             @Override
             public void onAnimationStart(Animation animation) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                // TODO Auto-generated method stub
             }
         });
         mLayout.setAnimation(animStart);
